@@ -10,7 +10,25 @@
         Height="450"
         Width="800"
         >
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="RectGaze">
+                <Style.Triggers>
+                    <Trigger Property="wpf:Behaviors.HasGaze" Value="True">
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        
+        <TextBox HorizontalAlignment="Left" Height="349" Margin="320,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="450"
+                 wpf:Behaviors.IsGazeAware="True"/>
+        <Button x:Name="Send" Click="Send_Click" Content="Send" HorizontalAlignment="Left" Margin="640,380,0,0" VerticalAlignment="Top" Width="142" Height="29"/>
+        <Rectangle x:Name="Rect" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="334" Margin="25,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="183"
+                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.HasGazeChanged="HelloCMD"/>
+
+
+
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tobii.Interaction.Wpf;
 
 namespace E.A.T
 {
@@ -23,6 +24,23 @@ namespace E.A.T
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Send_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HelloCMD(object sender, HasGazeChangedRoutedEventArgs e)
+        {
+            if (e.HasGaze)
+            {
+                Console.WriteLine("I am here");
+            }
+            else
+            {
+                Console.WriteLine("Good bye");
+            }
         }
     }
 }
