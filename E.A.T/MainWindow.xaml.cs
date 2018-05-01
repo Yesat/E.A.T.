@@ -28,11 +28,12 @@ namespace E.A.T
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-
+            Console.WriteLine("Click!");
         }
 
         private void HelloCMD(object sender, HasGazeChangedRoutedEventArgs e)
         {
+            Console.WriteLine("From: "+((Shape)sender).Name);
             if (e.HasGaze)
             {
                 Console.WriteLine("I am here");
@@ -42,5 +43,29 @@ namespace E.A.T
                 Console.WriteLine("Good bye");
             }
         }
+
+        private void Hello2(object sender, ActivationRoutedEventArgs e)
+        {
+            Console.WriteLine("From: " + ((Shape)sender).Name);
+            
+        }
+
+        private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.RightAlt)
+            {
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+            }
+        }
+
+        private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.RightAlt)
+            {
+                ((App)Application.Current).Host.Commands.Input.SendActivation();
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            }
+        }
     }
+
 }

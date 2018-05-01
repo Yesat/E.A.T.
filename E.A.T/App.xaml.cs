@@ -18,6 +18,11 @@ namespace E.A.T
         private Host _host;
         private WpfInteractorAgent _agent;
 
+        public Host Host
+        {
+            get { return _host; }
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             // Everything starts with initializing Host, which manages connection to the 

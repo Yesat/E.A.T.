@@ -7,28 +7,70 @@
         xmlns:local="clr-namespace:E.A.T"
         mc:Ignorable="d"
         Title="E.A.T."
+        WindowStartupLocation="CenterScreen"
         Height="450"
         Width="800"
+        
+        PreviewKeyDown="MainWindow_OnPreviewKeyDown"
+        PreviewKeyUp="MainWindow_OnPreviewKeyUp"
+        
         >
-    
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="RectGaze">
                 <Style.Triggers>
                     <Trigger Property="wpf:Behaviors.HasGaze" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                                    From="LightSkyBlue" To="DeepSkyBlue" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                        From="DeepSkyBlue" To="LightSkyBlue" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="ActiRect">
+                <Style.Triggers>
+                    <Trigger Property="wpf:Behaviors.HasActivationFocus" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                                    From="LightSkyBlue" To="Orange" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                        From="Orange" To="LightSkyBlue" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
                     </Trigger>
                 </Style.Triggers>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="349" Margin="320,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="450"
+        <TextBox HorizontalAlignment="Left" Height="349" Margin="320,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="450"
                  wpf:Behaviors.IsGazeAware="True"/>
         <Button x:Name="Send" Click="Send_Click" Content="Send" HorizontalAlignment="Left" Margin="640,380,0,0" VerticalAlignment="Top" Width="142" Height="29"/>
-        <Rectangle x:Name="Rect" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="334" Margin="25,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="183"
-                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.HasGazeChanged="HelloCMD"/>
-
-
+        <Rectangle x:Name="Rect_gaze" Fill="LightSkyBlue" HorizontalAlignment="Left" Height="334" Margin="25,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"
+                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.HasGazeChanged="HelloCMD" Style="{StaticResource RectGaze}"/>
+        <Rectangle x:Name="Rect_activ" Fill="LightSkyBlue" HorizontalAlignment="Left" Height="334" Margin="184,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"
+            wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="Hello2" Style="{StaticResource ActiRect}"/>
 
     </Grid>
 </Window>
