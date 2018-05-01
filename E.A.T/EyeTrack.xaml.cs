@@ -22,7 +22,22 @@ namespace E.A.T
     {
         public EyeTrack()
         {
+            this.Visibility = Visibility.Hidden;
             InitializeComponent();
+        }
+
+
+        private void EyeTrack_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                this.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void EyeTrack_OnPreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
         }
     }
 }

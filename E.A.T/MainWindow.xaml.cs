@@ -21,9 +21,21 @@ namespace E.A.T
     /// </summary>
     public partial class MainWindow : Window
     {
+        private EyeTrack eyeWindow;
+
         public MainWindow()
         {
+            eyeWindow = new EyeTrack();
             InitializeComponent();
+        }
+
+        /**
+         * We need this override OnClosed otherwise the eyetrack window is not properly closed
+         */
+        protected override void OnClosed(EventArgs e)
+        {
+            this.eyeWindow.Close();
+            base.OnClosed(e);
         }
 
         private void Send_Click(object sender, RoutedEventArgs e)
@@ -56,6 +68,10 @@ namespace E.A.T
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
             }
+            if (e.Key == Key.Space)
+            {
+                this.eyeWindow.Visibility = Visibility.Visible;
+            }
         }
 
         private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
@@ -64,6 +80,10 @@ namespace E.A.T
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivation();
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            }
+            if (e.Key == Key.Space)
+            {
+                this.eyeWindow.Visibility = Visibility.Hidden;
             }
         }
 

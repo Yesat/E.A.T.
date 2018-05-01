@@ -39,6 +39,8 @@ namespace E.A.T
             // we will close the coonection to the Tobii Engine before exit.
             _host.DisableConnection();
 
+            Console.WriteLine("Test");
+
             base.OnExit(e);
         }
     }

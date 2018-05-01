@@ -6,13 +6,19 @@
         xmlns:wpf="clr-namespace:Tobii.Interaction.Wpf;assembly=Tobii.Interaction.Net"
         xmlns:local="clr-namespace:E.A.T"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800"
+        Title="eyetrack menu" Height="257.647" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Opacity="0.5"
          
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="NoResize"
+        Background="Aqua"
+        
+        PreviewKeyDown="EyeTrack_OnPreviewKeyDown"
+        PreviewKeyUp="EyeTrack_OnPreviewKeyUp"
         >
-    <Grid>
+    <Grid Margin="0,312,0,25">
         
     </Grid>
 </Window>
