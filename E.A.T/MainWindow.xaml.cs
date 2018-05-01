@@ -66,6 +66,26 @@ namespace E.A.T
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
             }
         }
+
+        private void SpellButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SpellingError spellErr = this.TextEdit.GetSpellingError(this.TextEdit.CaretPosition);
+                foreach (string sugg in spellErr.Suggestions){
+                    Console.WriteLine(sugg);
+                }
+                List<string> bla = spellErr.Suggestions.ToList();
+                spellErr.Correct(bla[0]);
+
+            }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("No suggestions");
+            }
+            
+
+        }
     }
 
 }
