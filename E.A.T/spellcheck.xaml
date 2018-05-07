@@ -21,6 +21,34 @@
             <BitmapImage x:Key="Ok_img" UriSource="/Media/Images/valide.png"/>
             <BitmapImage x:Key="Cancel_img" UriSource="/Media/Images/cancel.png"/>
             <BitmapImage x:Key="Exit_img" UriSource="/Media/Images/exit.png"/>
+            <Style x:Key="ItemList" TargetType="{x:Type ListViewItem}">
+                <Setter Property="wpf:Behaviors.IsGazeAware" Value="True"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Background" Value="White"/>
+                <Style.Triggers>
+                    <Trigger Property="wpf:Behaviors.HasGaze" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation AutoReverse="False" Duration="0:0:1" From="White" To="LightGray"
+                    AccelerationRatio="1" 
+                    Storyboard.TargetProperty="(ListViewItem.Background).(SolidColorBrush.Color)"/>
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation AutoReverse="False" Duration="0:0:1" From="LightGray" To="White"
+                    AccelerationRatio="1" 
+                    Storyboard.TargetProperty="(ListViewItem.Background).(SolidColorBrush.Color)"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <Style x:Key="RectGaze">
                 <Style.Triggers>
                     <Trigger Property="wpf:Behaviors.HasActivationFocus" Value="True">
@@ -56,8 +84,7 @@
                    wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"
                    />
         <ListView x:Name="suggestions" HorizontalAlignment="Left" Height="336" Margin="23,25,0,0" VerticalAlignment="Top" Width="588"
-                  wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"
-                  />
+                  wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.IsPannable="True"/>
 
         <Image HorizontalAlignment="Left" Height="100" Margin="660,25,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Ok_img}"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="660,141,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Cancel_img}"/>

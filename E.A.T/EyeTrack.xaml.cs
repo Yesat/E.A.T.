@@ -16,7 +16,7 @@ using Tobii.Interaction.Wpf;
 namespace E.A.T
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for EyeTrack.xaml
     /// </summary>
     public partial class EyeTrack : Window
     {

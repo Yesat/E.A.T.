@@ -16,7 +16,7 @@ using Tobii.Interaction.Wpf;
 namespace E.A.T
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for SpellCheck.xaml
     /// </summary>
     public partial class SpellCheck : Window
     {
@@ -25,7 +25,6 @@ namespace E.A.T
         public SpellCheck()
         {
             InitializeComponent();
-            ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
         }
 
         protected override void OnClosed(EventArgs e)
@@ -36,33 +35,53 @@ namespace E.A.T
 
         public void ToCorrect(SpellingError spErr)
         {
+            ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
             this.spErr = spErr;
             this.suggestions.Items.Clear();
             int i = 0;
+            Style style = this.FindResource("ItemList") as Style;
+
+            this.suggestions.ItemContainerStyle = style;
+            //Creation of the item list
             foreach (string sugg in this.spErr.Suggestions)
             {
                 TextBlock word = new TextBlock();
                 word.Text = sugg;
-                word.Name = "sugg" + i.ToString();
+                word.Name = "sugg" + i.ToString();//Id of the suggestion
+                word.SetIsActivatable(true);
+                word.SetIsTentativeFocusEnabled(true);
+                word.SetActivatedCommand(new ItemCommand(this));
                 this.suggestions.Items.Add(word);
                 Console.WriteLine(sugg);
                 i++;
             }
         }
 
+        /**
+         * Callback for the item selection by eye
+         */
+        public void ItemOfList(object sender)
+        {
+            string itemName = ((ActivatedArgs)sender).Interactor.Element.Name;
+            this.suggestions.SelectedItem = ((ActivatedArgs)sender).Interactor.Element;
+
+        }
+
+        /**
+         * Trigger with the user validate a button on the spelling window
+         */
         public void SpellButton(object sender, ActivationRoutedEventArgs e)
         {
             string bt_name = ((Rectangle)sender).Name;
-            Console.WriteLine(bt_name);
             switch (bt_name)
             {
-                case "bt_quit":
+                case "bt_quit": //Quit the splelling correction
                     this.Close();
                     break;
-                case "bt_ignore":
+                case "bt_ignore": //Ignore on go to the next available error
                     this.Close();
                     break;
-                case "bt_ok":
+                case "bt_ok": //Validation of the correction
                     if(this.suggestions.SelectedItem != null)
                     {
                         string choice = ((TextBlock)this.suggestions.SelectedItem).Text;
@@ -77,16 +96,55 @@ namespace E.A.T
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            
+            switch (e.Key)
+            {
+                case Key.LeftShift:
+                    ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
+                    break;
+
+            }
         }
 
         private void Window_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space)
+            switch (e.Key)
             {
-                ((App)Application.Current).Host.Commands.Input.SendActivation();
-                ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                case Key.LeftShift:
+                    ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
+                    break;
+                case Key.Space:
+                    ((App)Application.Current).Host.Commands.Input.SendActivation();
+                    ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                    break;
+
             }
+        }
+
+    }
+
+    /**
+     * This class is use to put eye interaction on the item list
+     */
+    public class ItemCommand : ICommand
+    {
+        private SpellCheck vm;
+        public ItemCommand(SpellCheck vm)
+        {
+            this.vm = vm;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+        public void Execute(object parameter)
+        {
+            vm.ItemOfList(parameter);
         }
     }
 }
