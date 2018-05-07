@@ -1,0 +1,67 @@
+﻿<Window x:Class="E.A.T.SpellCheck"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:Tobii.Interaction.Wpf;assembly=Tobii.Interaction.Net"
+        xmlns:local="clr-namespace:E.A.T"
+        mc:Ignorable="d"
+        Title="spell check" Height="400" Width="800"
+        WindowStartupLocation="CenterScreen"        
+         
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        
+        PreviewKeyDown="Window_PreviewKeyDown"
+        PreviewKeyUp="Window_PreviewKeyUp"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <BitmapImage x:Key="Ok_img" UriSource="/Media/Images/valide.png"/>
+            <BitmapImage x:Key="Cancel_img" UriSource="/Media/Images/cancel.png"/>
+            <BitmapImage x:Key="Exit_img" UriSource="/Media/Images/exit.png"/>
+            <Style x:Key="RectGaze">
+                <Style.Triggers>
+                    <Trigger Property="wpf:Behaviors.HasActivationFocus" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                                    From="White" To="LightGray" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                        From="LightGray" To="White" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Rectangle x:Name="bt_ok" Fill="White" HorizontalAlignment="Left" Height="100" Margin="660,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource RectGaze}"
+                    wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"/>
+
+        <Rectangle x:Name="bt_ignore" Fill="White" HorizontalAlignment="Left" Height="100" Margin="660,141,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource RectGaze}"
+                   wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"
+                   />
+        <Rectangle x:Name="bt_quit" Fill="White" HorizontalAlignment="Left" Height="100" Margin="660,261,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource RectGaze}"
+                   wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"
+                   />
+        <ListView x:Name="suggestions" HorizontalAlignment="Left" Height="336" Margin="23,25,0,0" VerticalAlignment="Top" Width="588"
+                  wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"
+                  />
+
+        <Image HorizontalAlignment="Left" Height="100" Margin="660,25,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Ok_img}"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="660,141,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Cancel_img}"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="660,261,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Exit_img}"/>
+
+    </Grid>
+</Window>

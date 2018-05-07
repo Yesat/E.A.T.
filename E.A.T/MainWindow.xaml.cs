@@ -22,6 +22,7 @@ namespace E.A.T
     public partial class MainWindow : Window
     {
         private EyeTrack eyeWindow;
+        private SpellCheck spellWindow;
 
         public MainWindow()
         {
@@ -35,6 +36,10 @@ namespace E.A.T
         protected override void OnClosed(EventArgs e)
         {
             this.eyeWindow.Close();
+            if(this.spellWindow != null)
+            {
+                this.spellWindow.Close();
+            }
             base.OnClosed(e);
         }
 
@@ -91,13 +96,9 @@ namespace E.A.T
         {
             try
             {
-                SpellingError spellErr = this.TextEdit.GetSpellingError(this.TextEdit.CaretPosition);
-                foreach (string sugg in spellErr.Suggestions){
-                    Console.WriteLine(sugg);
-                }
-                List<string> bla = spellErr.Suggestions.ToList();
-                spellErr.Correct(bla[0]);
-
+                this.spellWindow = new SpellCheck();
+                this.spellWindow.Visibility = Visibility.Visible;
+                this.spellWindow.ToCorrect(this.TextEdit.GetSpellingError(this.TextEdit.CaretPosition));
             }
             catch (NullReferenceException)
             {

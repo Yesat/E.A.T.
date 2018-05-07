@@ -37,7 +37,10 @@ namespace E.A.T
 
         private void EyeTrack_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
-            this.Visibility = Visibility.Hidden;
+            if (e.Key == Key.Space)
+            {
+                this.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

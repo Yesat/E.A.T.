@@ -64,7 +64,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Height="349" Margin="320,10,0,0" VerticalAlignment="Top" Width="450"
+        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Height="349" Margin="320,10,0,0" VerticalAlignment="Top" Width="450" VerticalScrollBarVisibility="Auto"
                  wpf:Behaviors.IsGazeAware="True"
                      SpellCheck.IsEnabled="True" Language="en-EN"
                      />
