@@ -68,11 +68,6 @@
                  wpf:Behaviors.IsGazeAware="True"
                      SpellCheck.IsEnabled="True" Language="en-EN"
                      />
-        <Button x:Name="Send" Click="Send_Click" Content="Send" HorizontalAlignment="Left" Margin="640,380,0,0" VerticalAlignment="Top" Width="142" Height="29"/>
-        <Rectangle x:Name="Rect_gaze" Fill="LightSkyBlue" HorizontalAlignment="Left" Height="334" Margin="25,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"
-                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.HasGazeChanged="HelloCMD" Style="{StaticResource RectGaze}"/>
-        <Rectangle x:Name="Rect_activ" Fill="LightSkyBlue" HorizontalAlignment="Left" Height="334" Margin="184,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="94"
-            wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="Hello2" Style="{StaticResource ActiRect}"/>
         <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="524,380,0,0" VerticalAlignment="Top" Width="91" Height="29"/>
 
     </Grid>

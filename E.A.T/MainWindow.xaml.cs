@@ -43,51 +43,29 @@ namespace E.A.T
             base.OnClosed(e);
         }
 
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("Click!");
-        }
 
-        private void HelloCMD(object sender, HasGazeChangedRoutedEventArgs e)
-        {
-            Console.WriteLine("From: "+((Shape)sender).Name);
-            if (e.HasGaze)
-            {
-                Console.WriteLine("I am here");
-            }
-            else
-            {
-                Console.WriteLine("Good bye");
-            }
-        }
-
-        private void Hello2(object sender, ActivationRoutedEventArgs e)
-        {
-            Console.WriteLine("From: " + ((Shape)sender).Name);
-            
-        }
-
+        /**
+         * This function detect when a key is press down
+         */
         private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.RightAlt)
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-            }
-            if (e.Key == Key.Space)
-            {
                 this.eyeWindow.Visibility = Visibility.Visible;
             }
+           
         }
 
+        /**
+         * This function detect when a key is release
+         */
         private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.RightAlt)
             {
-                ((App)Application.Current).Host.Commands.Input.SendActivation();
-                ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
-            }
-            if (e.Key == Key.Space)
-            {
+                //((App)Application.Current).Host.Commands.Input.SendActivation();
+                //((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
                 this.eyeWindow.Visibility = Visibility.Hidden;
             }
         }
