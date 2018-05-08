@@ -22,7 +22,7 @@ namespace E.A.T
     public partial class MainWindow : Window
     {
         private EyeTrack eyeWindow;
-        private SpellCheck spellWindow;
+        private SpellCheckWindow spellWindow;
         private bool fontBoxHandle = true;
 
         public MainWindow()
@@ -59,6 +59,14 @@ namespace E.A.T
         }
 
         /**
+         * Return the spell checker of the text box
+         */
+        private SpellCheck GetSpellCheck()
+        {
+            return this.TextEdit.SpellCheck;
+        }
+
+        /**
          * This function detect when a key is release
          */
         private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
@@ -75,7 +83,7 @@ namespace E.A.T
         {
             try
             {
-                this.spellWindow = new SpellCheck();
+                this.spellWindow = new SpellCheckWindow();
                 this.spellWindow.Visibility = Visibility.Visible;
                 this.spellWindow.ToCorrect(this.TextEdit.GetSpellingError(this.TextEdit.CaretPosition));
             }

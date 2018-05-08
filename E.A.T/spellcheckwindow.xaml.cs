@@ -18,11 +18,12 @@ namespace E.A.T
     /// <summary>
     /// Interaction logic for SpellCheck.xaml
     /// </summary>
-    public partial class SpellCheck : Window
+    public partial class SpellCheckWindow : Window
     {
         private SpellingError spErr;
+        private SpellCheck splCheck;
 
-        public SpellCheck()
+        public SpellCheckWindow()
         {
             InitializeComponent();
         }
@@ -150,8 +151,8 @@ namespace E.A.T
      */
     public class ItemCommand : ICommand
     {
-        private SpellCheck vm;
-        public ItemCommand(SpellCheck vm)
+        private SpellCheckWindow vm;
+        public ItemCommand(SpellCheckWindow vm)
         {
             this.vm = vm;
         }

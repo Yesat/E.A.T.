@@ -81,8 +81,8 @@
     <Compile Include="EyeTrack.xaml.cs">
       <DependentUpon>EyeTrack.xaml</DependentUpon>
     </Compile>
-    <Compile Include="spellcheck.xaml.cs">
-      <DependentUpon>spellcheck.xaml</DependentUpon>
+    <Compile Include="spellcheckwindow.xaml.cs">
+      <DependentUpon>spellcheckwindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,7 +100,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="spellcheck.xaml">
+    <Page Include="spellcheckwindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
