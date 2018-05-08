@@ -27,12 +27,19 @@ namespace E.A.T
             InitializeComponent();
         }
 
+        /**
+         * Overide of the base OnClosed
+         * We disable the activation mode of tobii
+         */
         protected override void OnClosed(EventArgs e)
         {
             ((App)Application.Current).Host.Commands.Input.SendActivationModeOff(); ;
             base.OnClosed(e);
         }
 
+        /**
+         * Function that start the spelling correction
+         */
         public void ToCorrect(SpellingError spErr)
         {
             ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
@@ -45,14 +52,16 @@ namespace E.A.T
             //Creation of the item list
             foreach (string sugg in this.spErr.Suggestions)
             {
+                //Creation of the item
                 TextBlock word = new TextBlock();
                 word.Text = sugg;
                 word.Name = "sugg" + i.ToString();//Id of the suggestion
                 word.SetIsActivatable(true);
                 word.SetIsTentativeFocusEnabled(true);
                 word.SetActivatedCommand(new ItemCommand(this));
+                word.FontSize = 18;
+                //Add it to the itemlist
                 this.suggestions.Items.Add(word);
-                Console.WriteLine(sugg);
                 i++;
             }
         }
@@ -62,17 +71,20 @@ namespace E.A.T
          */
         public void ItemOfList(object sender)
         {
-            string itemName = ((ActivatedArgs)sender).Interactor.Element.Name;
             this.suggestions.SelectedItem = ((ActivatedArgs)sender).Interactor.Element;
 
         }
 
+        /**
+         * When we click on a button. Forward to SpellButton for the handling
+         */
         public void ClickButton(object sender, RoutedEventArgs e)
         {
             this.SpellButton(sender, null);
         }
+
         /**
-         * Trigger with the user validate a button on the spelling window
+         * Trigger with the user validate a button on the spelling window with eye
          */
         public void SpellButton(object sender, ActivationRoutedEventArgs e)
         {
@@ -83,6 +95,7 @@ namespace E.A.T
                     this.Close();
                     break;
                 case "bt_ignore": //Ignore on go to the next available error
+                    //TO DO: check if there is a list of spelling errors
                     this.Close();
                     break;
                 case "bt_ok": //Validation of the correction
@@ -90,6 +103,7 @@ namespace E.A.T
                     {
                         string choice = ((TextBlock)this.suggestions.SelectedItem).Text;
                         this.spErr.Correct(choice);
+                        //TO DO: check if there is a list of spelling errors
                         this.Close();
                     }
                     break;
@@ -98,23 +112,29 @@ namespace E.A.T
             
         }
 
+        /**
+        * This function detect when a key is press down
+        */
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.LeftShift:
-                    ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
+                    ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
                     break;
 
             }
         }
 
+        /**
+         * This function detect when a key is release
+         */
         private void Window_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.LeftShift:
-                    ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
+                    ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     break;
                 case Key.Space:
                     ((App)Application.Current).Host.Commands.Input.SendActivation();

@@ -26,7 +26,9 @@ namespace E.A.T
             InitializeComponent();
         }
 
-
+        /**
+        * This function detect when a key is press down
+        */
         private void EyeTrack_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.RightAlt)
@@ -35,6 +37,9 @@ namespace E.A.T
             }
         }
 
+        /**
+         * This function detect when a key is release
+         */
         private void EyeTrack_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.RightAlt)
