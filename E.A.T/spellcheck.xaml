@@ -49,13 +49,13 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            <Style x:Key="RectGaze">
+            <Style x:Key="ButtonGaze">
                 <Style.Triggers>
                     <Trigger Property="wpf:Behaviors.HasActivationFocus" Value="True">
                         <Trigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                    <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
                                                     From="White" To="LightGray" Duration="0:0:.2" />
                                 </Storyboard>
                             </BeginStoryboard>
@@ -63,7 +63,7 @@
                         <Trigger.ExitActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                    <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
                                         From="LightGray" To="White" Duration="0:0:.2" />
                                 </Storyboard>
                             </BeginStoryboard>
@@ -74,21 +74,29 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Rectangle x:Name="bt_ok" Fill="White" HorizontalAlignment="Left" Height="100" Margin="660,25,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource RectGaze}"
-                    wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"/>
-
-        <Rectangle x:Name="bt_ignore" Fill="White" HorizontalAlignment="Left" Height="100" Margin="660,141,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource RectGaze}"
-                   wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"
-                   />
-        <Rectangle x:Name="bt_quit" Fill="White" HorizontalAlignment="Left" Height="100" Margin="660,261,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource RectGaze}"
-                   wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton"
-                   />
+        <Button x:Name="bt_ok" Background="White" HorizontalAlignment="Left" Height="100" Margin="660,25,0,0"  VerticalAlignment="Top" Width="100" Style="{StaticResource ButtonGaze}"
+                    wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton" Click="ClickButton"
+                >
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{StaticResource Ok_img}"/>
+            </StackPanel>            
+        </Button>
+        <Button x:Name="bt_ignore" Background="White" HorizontalAlignment="Left" Height="100" Margin="660,141,0,0" VerticalAlignment="Top" Width="100" Style="{StaticResource ButtonGaze}"
+                   wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton" Click="ClickButton"
+                   >
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{StaticResource Cancel_img}"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="bt_quit" Background="White" HorizontalAlignment="Left" Height="100" Margin="660,261,0,0" VerticalAlignment="Top" Width="100" Style="{StaticResource ButtonGaze}"
+                   wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="SpellButton" Click="ClickButton"
+                   >
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{StaticResource Exit_img}"/>
+            </StackPanel>
+        </Button>
         <ListView x:Name="suggestions" HorizontalAlignment="Left" Height="336" Margin="23,25,0,0" VerticalAlignment="Top" Width="588"
                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.IsPannable="True"/>
-
-        <Image HorizontalAlignment="Left" Height="100" Margin="660,25,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Ok_img}"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="660,141,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Cancel_img}"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="660,261,0,0" VerticalAlignment="Top" Width="100" Source="{StaticResource Exit_img}"/>
 
     </Grid>
 </Window>

@@ -67,12 +67,16 @@ namespace E.A.T
 
         }
 
+        public void ClickButton(object sender, RoutedEventArgs e)
+        {
+            this.SpellButton(sender, null);
+        }
         /**
          * Trigger with the user validate a button on the spelling window
          */
         public void SpellButton(object sender, ActivationRoutedEventArgs e)
         {
-            string bt_name = ((Rectangle)sender).Name;
+            string bt_name = ((Button)sender).Name;
             switch (bt_name)
             {
                 case "bt_quit": //Quit the splelling correction
@@ -119,7 +123,6 @@ namespace E.A.T
 
             }
         }
-
     }
 
     /**
