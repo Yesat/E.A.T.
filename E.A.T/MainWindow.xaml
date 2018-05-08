@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="E.A.T."
         WindowStartupLocation="CenterScreen"
-        Height="450"
+        Height="641.716"
         Width="800"
         
         PreviewKeyDown="MainWindow_OnPreviewKeyDown"
@@ -63,12 +63,27 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Height="349" Margin="320,10,0,0" VerticalAlignment="Top" Width="450" VerticalScrollBarVisibility="Auto"
+    <Grid Margin="0,0,0,-6">
+        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Height="349" Margin="332,212,0,0" VerticalAlignment="Top" Width="450" VerticalScrollBarVisibility="Auto"
                  wpf:Behaviors.IsGazeAware="True"
-                     SpellCheck.IsEnabled="True" Language="en-EN"
+                     SpellCheck.IsEnabled="True" Language="en-EN" Grid.ColumnSpan="2"
+                     FontFamily="Calibri"
                      />
-        <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="524,380,0,0" VerticalAlignment="Top" Width="91" Height="29"/>
+        <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="222.367,566,0,0" VerticalAlignment="Top" Width="91" Height="29" Grid.Column="1"/>
+        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="0,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="792" RenderTransformOrigin="0.5,0.5"/>
+        <Grid HorizontalAlignment="Left" Height="87" Margin="-4,0,0,0" VerticalAlignment="Top" Width="796" Background="LightGray" Grid.ColumnSpan="2" >
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Style" VerticalAlignment="Top"/>
+            <ComboBox x:Name="font" HorizontalAlignment="Left" Height="19" Margin="10,31,0,0" VerticalAlignment="Top" Width="100"
+                      DropDownClosed="font_DropDownClosed">
+                <ComboBoxItem x:Name="Arial" FontFamily="Arial">Arial</ComboBoxItem>
+                <ComboBoxItem x:Name="ArialBlack" FontFamily="Arial Black">Arial Black</ComboBoxItem>
+                <ComboBoxItem x:Name="Calibri" IsSelected="True" FontFamily="Calibri">Calibri</ComboBoxItem>
+                <ComboBoxItem x:Name="Times" FontFamily="Times New Roman">Times New Roman</ComboBoxItem>
+            </ComboBox>
+
+
+        </Grid>
+
 
     </Grid>
 </Window>

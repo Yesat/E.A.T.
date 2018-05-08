@@ -23,6 +23,7 @@ namespace E.A.T
     {
         private EyeTrack eyeWindow;
         private SpellCheck spellWindow;
+        private bool fontBoxHandle = true;
 
         public MainWindow()
         {
@@ -85,6 +86,20 @@ namespace E.A.T
             
 
         }
-    }
 
+        private void font_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            fontBoxHandle = !cmb.IsDropDownOpen;
+            setFontFamily();
+        }
+
+        private void setFontFamily()
+        {
+            this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
+            ComboBoxItem item = this.font.SelectedItem as ComboBoxItem;
+            FontFamily nf = new FontFamily(item.Content.ToString());
+            this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
+        }
+    }
 }
