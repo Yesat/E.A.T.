@@ -20,8 +20,10 @@ namespace E.A.T
     /// </summary>
     public partial class EyeTrack : Window
     {
-        public EyeTrack()
+        private MainWindow parent;
+        public EyeTrack(MainWindow parent)
         {
+            this.parent = parent;
             this.Visibility = Visibility.Hidden;
             InitializeComponent();
         }

@@ -27,7 +27,7 @@ namespace E.A.T
 
         public MainWindow()
         {
-            eyeWindow = new EyeTrack();
+            eyeWindow = new EyeTrack(this);
             InitializeComponent();
         }
 
@@ -83,6 +83,11 @@ namespace E.A.T
         {
             try
             {
+                if(this.spellWindow != null)
+                {
+                    this.spellWindow.Close();
+                    this.spellWindow = null;
+                }
                 this.spellWindow = new SpellCheckWindow();
                 this.spellWindow.Visibility = Visibility.Visible;
                 this.spellWindow.ToCorrect(this.TextEdit.GetSpellingError(this.TextEdit.CaretPosition));
