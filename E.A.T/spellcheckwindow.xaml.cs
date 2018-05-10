@@ -21,10 +21,13 @@ namespace E.A.T
     public partial class SpellCheckWindow : Window
     {
         private SpellingError spErr;
-        private SpellCheck splCheck;
+        private MainWindow parent;
+        private TextPointer nextError;
 
-        public SpellCheckWindow()
+        public SpellCheckWindow(MainWindow parent)
         {
+            this.parent = parent;
+            this.spErr = null;
             InitializeComponent();
         }
 
@@ -38,13 +41,35 @@ namespace E.A.T
             base.OnClosed(e);
         }
 
+
+        public void Corrections()
+        {
+            this.nextError = this.parent.TextEdit.Document.ContentStart;
+            this.NextCorrection();
+            this.ToCorrect();
+
+        }
+        /**
+         * Function that return next error
+         */
+         public void NextCorrection()
+        {
+            this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(nextError, LogicalDirection.Forward);
+            try
+            {
+                this.spErr = this.parent.TextEdit.GetSpellingError(this.nextError);
+            }
+            catch (ArgumentNullException)
+            {
+                this.Close();
+            }
+        }
         /**
          * Function that start the spelling correction
          */
-        public void ToCorrect(SpellingError spErr)
+        public void ToCorrect()
         {
             ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-            this.spErr = spErr;
             this.suggestions.Items.Clear();
             int i = 0;
             Style style = this.FindResource("ItemList") as Style;
@@ -65,6 +90,13 @@ namespace E.A.T
                 this.suggestions.Items.Add(word);
                 i++;
             }
+            if (this.suggestions.Items.Count == 0)
+            {
+                this.spErr.IgnoreAll();
+                this.NextCorrection();
+                this.ToCorrect();
+            }
+
         }
 
         /**
@@ -96,8 +128,25 @@ namespace E.A.T
                     this.Close();
                     break;
                 case "bt_ignore": //Ignore on go to the next available error
-                    //TO DO: check if there is a list of spelling errors
-                    this.Close();
+                                  //TO DO: check if there is a list of spelling errors
+                    this.spErr.IgnoreAll();
+                    try
+                    {
+                        this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(this.nextError, LogicalDirection.Forward);
+                        if (this.nextError == null)
+                        {
+                            this.Close();
+                        }
+                        else
+                        {
+                            this.NextCorrection();
+                            this.ToCorrect();
+                        }
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        this.Close();
+                    }
                     break;
                 case "bt_ok": //Validation of the correction
                     if(this.suggestions.SelectedItem != null)
@@ -105,7 +154,16 @@ namespace E.A.T
                         string choice = ((TextBlock)this.suggestions.SelectedItem).Text;
                         this.spErr.Correct(choice);
                         //TO DO: check if there is a list of spelling errors
-                        this.Close();
+                        this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(this.nextError, LogicalDirection.Forward);
+                        if (this.nextError == null)
+                        {
+                            this.Close();
+                        }
+                        else
+                        {
+                            this.NextCorrection();
+                            this.ToCorrect();
+                        }
                     }
                     break;
 

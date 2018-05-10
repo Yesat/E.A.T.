@@ -88,13 +88,13 @@ namespace E.A.T
                     this.spellWindow.Close();
                     this.spellWindow = null;
                 }
-                this.spellWindow = new SpellCheckWindow();
+                this.spellWindow = new SpellCheckWindow(this);
                 this.spellWindow.Visibility = Visibility.Visible;
-                this.spellWindow.ToCorrect(this.TextEdit.GetSpellingError(this.TextEdit.CaretPosition));
+                this.spellWindow.Corrections();
             }
             catch (NullReferenceException)
             {
-                Console.WriteLine("No suggestions");
+                return;
             }
             
 
@@ -114,5 +114,6 @@ namespace E.A.T
             FontFamily nf = new FontFamily(item.Content.ToString());
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
         }
+
     }
 }
