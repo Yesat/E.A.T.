@@ -27,7 +27,7 @@ namespace E.A.T
 
         public MainWindow()
         {
-            eyeWindow = new EyeTrack(this);
+            this.eyeWindow = new EyeTrack(this);
             InitializeComponent();
         }
 
@@ -52,8 +52,10 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)
             {
-                ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                 this.eyeWindow.Visibility = Visibility.Visible;
+                //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                this.eyeWindow.Focus();
+                this.eyeWindow.setActif();
             }
            
         }
@@ -75,6 +77,7 @@ namespace E.A.T
             {
                 //((App)Application.Current).Host.Commands.Input.SendActivation();
                 //((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+                //this.eyeWindow.Close();
                 this.eyeWindow.Visibility = Visibility.Hidden;
             }
         }
@@ -113,6 +116,30 @@ namespace E.A.T
             ComboBoxItem item = this.font.SelectedItem as ComboBoxItem;
             FontFamily nf = new FontFamily(item.Content.ToString());
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
+        }
+
+        public void SendCommand(String cmd, String arg)
+        {
+            switch (cmd)
+            {
+                case "spell":
+                    this.SpellButton_Click(this, null);
+                    break;
+                case "fontsize":
+                    break;
+                case "fontfamily":
+                    break;
+                case "exit":
+                    this.Close();
+                    break;
+                case "save":
+                    this.Save_Executed(this, null);
+                    break;
+                case "load":
+                    this.Open_Executed(this, null);
+                    break;
+                    
+            }
         }
 
     }

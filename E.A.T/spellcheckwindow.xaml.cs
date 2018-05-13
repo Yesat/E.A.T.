@@ -37,7 +37,7 @@ namespace E.A.T
          */
         protected override void OnClosed(EventArgs e)
         {
-            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff(); ;
+            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
             base.OnClosed(e);
         }
 
@@ -154,16 +154,24 @@ namespace E.A.T
                         string choice = ((TextBlock)this.suggestions.SelectedItem).Text;
                         this.spErr.Correct(choice);
                         //TO DO: check if there is a list of spelling errors
-                        this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(this.nextError, LogicalDirection.Forward);
-                        if (this.nextError == null)
+                        try
+                        {
+                            this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(this.nextError, LogicalDirection.Forward);
+                            if (this.nextError == null)
+                            {
+                                this.Close();
+                            }
+                            else
+                            {
+                                this.NextCorrection();
+                                this.ToCorrect();
+                            }
+                        }
+                        catch (ArgumentNullException)
                         {
                             this.Close();
                         }
-                        else
-                        {
-                            this.NextCorrection();
-                            this.ToCorrect();
-                        }
+                        
                     }
                     break;
 

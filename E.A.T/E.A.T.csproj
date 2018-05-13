@@ -85,6 +85,9 @@
     <Compile Include="spellcheckwindow.xaml.cs">
       <DependentUpon>spellcheckwindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StyleWindow.xaml.cs">
+      <DependentUpon>StyleWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="spellcheckwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StyleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +166,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Media\Images\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\Images\spellcheck.png" />
+    <Resource Include="Media\Images\style.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Tobii.Interaction.0.7.3\build\Tobii.Interaction.targets" Condition="Exists('..\packages\Tobii.Interaction.0.7.3\build\Tobii.Interaction.targets')" />

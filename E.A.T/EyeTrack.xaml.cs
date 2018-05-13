@@ -24,10 +24,26 @@ namespace E.A.T
         public EyeTrack(MainWindow parent)
         {
             this.parent = parent;
-            this.Visibility = Visibility.Hidden;
             InitializeComponent();
+            //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
         }
 
+        /**
+         * Overide of the base OnClosed
+         * We disable the activation mode of tobii
+         */
+        protected override void OnClosed(EventArgs e)
+        {
+            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            base.OnClosed(e);
+        }
+
+        public void setActif()
+        {
+            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            Console.WriteLine("Blou");
+            ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+        }
         /**
         * This function detect when a key is press down
         */
@@ -35,7 +51,7 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)
             {
-                this.Visibility = Visibility.Visible;
+                //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
             }
         }
 
@@ -49,7 +65,37 @@ namespace E.A.T
                 ((App)Application.Current).Host.Commands.Input.SendActivation();
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
                 this.Visibility = Visibility.Hidden;
+                //this.Close();
             }
+        }
+
+        private void activation(object sender, ActivationRoutedEventArgs e)
+        {
+            String name = ((Rectangle)sender).Name;
+            switch (name)
+            {
+                case "save":
+                    this.parent.SendCommand("save",null);
+                    break;
+                case "load":
+                    this.parent.SendCommand("open", null);
+                    break;
+
+                case "style":
+
+                    break;
+                case "spell":
+                    this.parent.SendCommand("spell", null);
+                    break;
+                case "exit":
+                    this.parent.SendCommand("exit", null); ;
+                    break;
+            }
+        }
+
+        public MainWindow GetParent()
+        {
+            return this.parent;
         }
     }
 }
