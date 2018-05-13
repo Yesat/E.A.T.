@@ -34,14 +34,15 @@ namespace E.A.T
          */
         protected override void OnClosed(EventArgs e)
         {
-            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+            {
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            }
             base.OnClosed(e);
         }
 
         public void setActif()
         {
-            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
-            Console.WriteLine("Blou");
             ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
         }
         /**
@@ -80,9 +81,8 @@ namespace E.A.T
                 case "load":
                     this.parent.SendCommand("open", null);
                     break;
-
                 case "style":
-
+                    this.parent.SendCommand("style", null);
                     break;
                 case "spell":
                     this.parent.SendCommand("spell", null);

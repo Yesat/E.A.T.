@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:E.A.T"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        
+        Title="Style" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        
+        PreviewKeyDown="Window_PreviewKeyDown"
+        PreviewKeyUp="Window_PreviewKeyUp"
+        >
     <Grid>
         
     </Grid>

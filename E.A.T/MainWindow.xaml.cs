@@ -23,6 +23,7 @@ namespace E.A.T
     {
         private EyeTrack eyeWindow;
         private SpellCheckWindow spellWindow;
+        private StyleWindow styleWindow;
         private bool fontBoxHandle = true;
 
         public MainWindow()
@@ -41,6 +42,10 @@ namespace E.A.T
             {
                 this.spellWindow.Close();
             }
+            if(this.styleWindow != null)
+            {
+                this.styleWindow.Close();
+            }
             base.OnClosed(e);
         }
 
@@ -52,10 +57,13 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)
             {
-                this.eyeWindow.Visibility = Visibility.Visible;
-                //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                this.eyeWindow.Focus();
-                this.eyeWindow.setActif();
+                if(((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                {
+                    this.eyeWindow.Visibility = Visibility.Visible;
+                    //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                    this.eyeWindow.Focus();
+                    this.eyeWindow.setActif();
+                }                
             }
            
         }
@@ -75,9 +83,6 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)
             {
-                //((App)Application.Current).Host.Commands.Input.SendActivation();
-                //((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
-                //this.eyeWindow.Close();
                 this.eyeWindow.Visibility = Visibility.Hidden;
             }
         }
@@ -125,6 +130,10 @@ namespace E.A.T
                 case "spell":
                     this.SpellButton_Click(this, null);
                     break;
+                case "style":
+                    this.styleWindow = new StyleWindow(this);
+                    this.styleWindow.Visibility = Visibility.Visible;
+                    break;
                 case "fontsize":
                     break;
                 case "fontfamily":
@@ -139,6 +148,20 @@ namespace E.A.T
                     this.Open_Executed(this, null);
                     break;
                     
+            }
+        }
+
+        private void CheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            if((bool)this.eyeBox.IsChecked)
+            {
+                ((App)Application.Current).Host.EnableConnection();
+                Console.WriteLine("Check");
+            }
+            else
+            {
+                ((App)Application.Current).Host.DisableConnection();
+                Console.WriteLine("Uncheck");
             }
         }
 

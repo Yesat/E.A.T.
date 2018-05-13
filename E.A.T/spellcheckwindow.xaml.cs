@@ -187,7 +187,10 @@ namespace E.A.T
             switch (e.Key)
             {
                 case Key.LeftShift:
-                    ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
+                    if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                    {
+                        ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
+                    }
                     break;
 
             }
@@ -201,11 +204,17 @@ namespace E.A.T
             switch (e.Key)
             {
                 case Key.LeftShift:
-                    ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
+                    if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                    {
+                        ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
+                    }
                     break;
                 case Key.Space:
-                    ((App)Application.Current).Host.Commands.Input.SendActivation();
-                    ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                    if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                    {
+                        ((App)Application.Current).Host.Commands.Input.SendActivation();
+                        ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                    }
                     break;
 
             }

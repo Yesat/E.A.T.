@@ -100,5 +100,6 @@
 
 
         </Grid>
+        <CheckBox x:Name="eyeBox" Content="Eye Tracking" HorizontalAlignment="Left" Margin="697,32,0,0" VerticalAlignment="Top" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsChecked="True"/>
     </Grid>
 </Window>

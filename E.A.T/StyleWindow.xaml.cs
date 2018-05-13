@@ -19,11 +19,43 @@ namespace E.A.T
     /// </summary>
     public partial class StyleWindow : Window
     {
-        private EyeTrack parent;
-        public StyleWindow(EyeTrack parent)
+        private MainWindow parent;
+        public StyleWindow(MainWindow parent)
         {
             this.parent = parent;
             InitializeComponent();
         }
-    }
+
+        /**
+        * This function detect when a key is press down
+        */
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.LeftShift:
+                    ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
+                    break;
+
+            }
+        }
+
+        /**
+         * This function detect when a key is release
+         */
+        private void Window_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.LeftShift:
+                    ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
+                    break;
+                case Key.Space:
+                    ((App)Application.Current).Host.Commands.Input.SendActivation();
+                    ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                    break;
+
+            }
+        }
+    }    
 }
