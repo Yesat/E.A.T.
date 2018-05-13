@@ -77,7 +77,7 @@
         <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="222.367,566,0,0" VerticalAlignment="Top" Width="91" Height="29" Grid.Column="1"/>
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="0,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="792" RenderTransformOrigin="0.5,0.5"/>
         <Grid HorizontalAlignment="Left" Height="87" Margin="-4,0,0,0" VerticalAlignment="Top" Width="796" Background="LightGray" Grid.ColumnSpan="2" >
-            <TextBlock HorizontalAlignment="Left" Margin="11,10,0,0" TextWrapping="Wrap" Text="File" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="11,10,0,0" TextWrapping="Wrap" Text="File" TextDecorations="Underline" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="41,37,0,0" TextWrapping="Wrap" Text="Save" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="41,61,0,0" TextWrapping="Wrap" Text="Open" VerticalAlignment="Top"/>
             <Button Command="ApplicationCommands.Open" Margin="10,59,760,6">
@@ -88,13 +88,16 @@
             </Button>
             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="87" Margin="75,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="1"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="81,13,0,0" TextWrapping="Wrap" Text="Style" VerticalAlignment="Top"/>
-            <ComboBox x:Name="font" HorizontalAlignment="Left" Height="19" Margin="81,34,0,0" VerticalAlignment="Top" Width="100"
+            <TextBlock HorizontalAlignment="Left" Margin="81,13,0,0" TextWrapping="Wrap" Text="Style" TextDecorations="Underline" VerticalAlignment="Top"/>
+            <ComboBox x:Name="font" HorizontalAlignment="Left" Height="22" Margin="81,34,0,0" VerticalAlignment="Top" Width="100"
                       DropDownClosed="font_DropDownClosed">
                 <ComboBoxItem x:Name="Arial" FontFamily="Arial">Arial</ComboBoxItem>
                 <ComboBoxItem x:Name="ArialBlack" FontFamily="Arial Black">Arial Black</ComboBoxItem>
                 <ComboBoxItem x:Name="Calibri" IsSelected="True" FontFamily="Calibri">Calibri</ComboBoxItem>
                 <ComboBoxItem x:Name="Times" FontFamily="Times New Roman">Times New Roman</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="font_size" HorizontalAlignment="Left" Height="22" Margin="186,34,0,0" VerticalAlignment="Top" Width="43"
+                DropDownClosed="size_DropDownClosed">
             </ComboBox>
 
 

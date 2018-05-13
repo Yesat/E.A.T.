@@ -52,7 +52,7 @@ namespace E.A.T
         /**
          * Function that return next error
          */
-         public void NextCorrection()
+        public void NextCorrection()
         {
             this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(nextError, LogicalDirection.Forward);
             try
@@ -84,7 +84,7 @@ namespace E.A.T
                 word.Name = "sugg" + i.ToString();//Id of the suggestion
                 word.SetIsActivatable(true);
                 word.SetIsTentativeFocusEnabled(true);
-                word.SetActivatedCommand(new ItemCommand(this));
+                word.SetActivatedCommand(new ItemCommand(this,"spell"));
                 word.FontSize = 18;
                 //Add it to the itemlist
                 this.suggestions.Items.Add(word);
@@ -149,7 +149,7 @@ namespace E.A.T
                     }
                     break;
                 case "bt_ok": //Validation of the correction
-                    if(this.suggestions.SelectedItem != null)
+                    if (this.suggestions.SelectedItem != null)
                     {
                         string choice = ((TextBlock)this.suggestions.SelectedItem).Text;
                         this.spErr.Correct(choice);
@@ -171,12 +171,12 @@ namespace E.A.T
                         {
                             this.Close();
                         }
-                        
+
                     }
                     break;
 
             }
-            
+
         }
 
         /**
@@ -221,29 +221,4 @@ namespace E.A.T
         }
     }
 
-    /**
-     * This class is use to put eye interaction on the item list
-     */
-    public class ItemCommand : ICommand
-    {
-        private SpellCheckWindow vm;
-        public ItemCommand(SpellCheckWindow vm)
-        {
-            this.vm = vm;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-        public void Execute(object parameter)
-        {
-            vm.ItemOfList(parameter);
-        }
-    }
 }

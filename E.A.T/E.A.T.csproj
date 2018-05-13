@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="eyeitem.cs" />
     <Compile Include="saveload.cs" />
     <Compile Include="EyeTrack.xaml.cs">
       <DependentUpon>EyeTrack.xaml</DependentUpon>

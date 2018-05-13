@@ -30,8 +30,7 @@
                         <Trigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation AutoReverse="False" Duration="0:0:1" From="White" To="LightGray"
-                    AccelerationRatio="1" 
+                                    <ColorAnimation Duration="0:0:0.2" From="White" To="LightGray"
                     Storyboard.TargetProperty="(ListViewItem.Background).(SolidColorBrush.Color)"/>
 
                                 </Storyboard>
@@ -40,8 +39,7 @@
                         <Trigger.ExitActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation AutoReverse="False" Duration="0:0:1" From="LightGray" To="White"
-                    AccelerationRatio="1" 
+                                    <ColorAnimation Duration="0:0:0.2" From="LightGray" To="White"
                     Storyboard.TargetProperty="(ListViewItem.Background).(SolidColorBrush.Color)"/>
                                 </Storyboard>
                             </BeginStoryboard>

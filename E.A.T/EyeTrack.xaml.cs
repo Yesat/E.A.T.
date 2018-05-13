@@ -79,7 +79,7 @@ namespace E.A.T
                     this.parent.SendCommand("save",null);
                     break;
                 case "load":
-                    this.parent.SendCommand("open", null);
+                    this.parent.SendCommand("load", null);
                     break;
                 case "style":
                     this.parent.SendCommand("style", null);

@@ -26,10 +26,21 @@ namespace E.A.T
         private StyleWindow styleWindow;
         private bool fontBoxHandle = true;
 
+        private List<double> fontSizeList = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+        public List<double> FontSizeList
+        {
+            get
+            {
+                return this.fontSizeList;
+            }
+        }
+
         public MainWindow()
         {
             this.eyeWindow = new EyeTrack(this);
             InitializeComponent();
+            this.font_size.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            this.font_size.SelectedItem = (double)12;
         }
 
         /**
@@ -123,6 +134,20 @@ namespace E.A.T
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
         }
 
+        private void size_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox cmb = (ComboBox)sender;
+            fontBoxHandle = !cmb.IsDropDownOpen;
+            setFontSize();
+        }
+
+        private void setFontSize()
+        {
+            this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
+            double item = (double)this.font_size.SelectedItem;
+            this.TextEdit.Selection.ApplyPropertyValue(Inline.FontSizeProperty, item);
+        }
+
         public void SendCommand(String cmd, String arg)
         {
             switch (cmd)
@@ -135,8 +160,21 @@ namespace E.A.T
                     this.styleWindow.Visibility = Visibility.Visible;
                     break;
                 case "fontsize":
+                    this.TextEdit.Focus();
+                    this.TextEdit.Selection.ApplyPropertyValue(Inline.FontSizeProperty, Convert.ToDouble(arg));
+                    this.font_size.SelectedItem = Convert.ToDouble(arg);
                     break;
                 case "fontfamily":
+                    this.TextEdit.Focus();
+                    FontFamily nf = new FontFamily(arg);
+                    this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
+                    foreach(ComboBoxItem item in this.font.Items)
+                    {
+                        if(item.Content.ToString() == arg)
+                        {
+                            this.font.SelectedItem = item;
+                        }
+                    }
                     break;
                 case "exit":
                     this.Close();

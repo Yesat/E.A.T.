@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tobii.Interaction.Wpf;
 
 namespace E.A.T
 {
@@ -22,8 +23,51 @@ namespace E.A.T
         private MainWindow parent;
         public StyleWindow(MainWindow parent)
         {
-            this.parent = parent;
+            this.parent = parent;            
             InitializeComponent();
+            String usedFontFamily = ((ComboBoxItem)this.parent.font.SelectedItem).Name;
+            String usedFontSize = this.parent.TextEdit.FontSize.ToString();
+            Style style = this.FindResource("ItemList") as Style;
+            this.fontsize.ItemContainerStyle = style;
+            /**
+             * Creation of the list of size
+             */
+            foreach (double size in this.parent.FontSizeList)
+            {
+                //Creation of the item
+                TextBlock word = new TextBlock();
+                word.Text = size.ToString();
+                word.SetIsActivatable(true);
+                word.SetIsTentativeFocusEnabled(true);
+                word.SetActivatedCommand(new ItemCommand(this, "style"));
+                word.FontSize = 18;
+                //Add it to the itemlist
+                this.fontsize.Items.Add(word);
+                if (word.Text == usedFontSize)
+                {
+                    this.fontsize.SelectedItem = word;
+                }
+                
+                
+            }
+            foreach(ListViewItem item in this.fontfamily.Items)
+            {
+                if(item.Name == usedFontFamily)
+                {
+                    this.fontfamily.SelectedItem = item;
+                }
+            }
+            ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+        }
+
+        /**
+        * Overide of the base OnClosed
+        * We disable the activation mode of tobii
+        */
+        protected override void OnClosed(EventArgs e)
+        {
+            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            base.OnClosed(e);
         }
 
         /**
@@ -56,6 +100,36 @@ namespace E.A.T
                     break;
 
             }
+        }
+
+        private void fontFamilyActiv(object sender, ActivationRoutedEventArgs e)
+        {
+            this.fontfamily.SelectedItem = ((ListViewItem)sender);
+        }
+
+        public void fontSizeActiv(object sender)
+        {
+            this.fontsize.SelectedItem = ((ActivatedArgs)sender).Interactor.Element;
+        }
+
+        private void ValidButton(object sender, ActivationRoutedEventArgs e)
+        {
+            string bt_name = ((Button)sender).Name;
+
+            switch (bt_name)
+            {
+                case "bt_ok":
+                    String family = ((String)((ListViewItem)this.fontfamily.SelectedItem).Content);
+                    String size = ((TextBlock)(this.fontsize.SelectedItem)).Text.ToString();
+                    this.parent.SendCommand("fontsize",size);
+                    this.parent.SendCommand("fontfamily", family);
+                    this.Close();
+                    break;
+                case "bt_quit":
+                    this.Close();
+                    break;
+            }
+
         }
     }    
 }
