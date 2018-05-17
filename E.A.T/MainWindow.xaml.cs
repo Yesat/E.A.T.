@@ -203,5 +203,14 @@ namespace E.A.T
             }
         }
 
+        private void TextEdit_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

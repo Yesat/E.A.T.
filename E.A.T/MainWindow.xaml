@@ -72,7 +72,7 @@
         <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Height="349" Margin="332,212,0,0" VerticalAlignment="Top" Width="450" VerticalScrollBarVisibility="Auto"
                  wpf:Behaviors.IsGazeAware="True"
                      SpellCheck.IsEnabled="True" Language="en-EN" Grid.ColumnSpan="2"
-                     FontFamily="Calibri"
+                     FontFamily="Calibri" TextChanged="TextEdit_TextChanged"
                      />
         <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="222.367,566,0,0" VerticalAlignment="Top" Width="91" Height="29" Grid.Column="1"/>
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="0,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="792" RenderTransformOrigin="0.5,0.5"/>
@@ -104,5 +104,12 @@
 
         </Grid>
         <CheckBox x:Name="eyeBox" Content="Eye Tracking" HorizontalAlignment="Left" Margin="697,32,0,0" VerticalAlignment="Top" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsChecked="True"/>
+        <RichTextBox HorizontalAlignment="Left" Height="34" Margin="157,212,0,0" VerticalAlignment="Top" Width="156" TextChanged="RichTextBox_TextChanged">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Word looked"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
     </Grid>
 </Window>
