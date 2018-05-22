@@ -98,7 +98,9 @@
         </Grid>
         <Grid x:Name="GazeArea"
               wpf:Behaviors.IsActivatable="True"
-              wpf:Behaviors.IsTentativeFocusEnabled="True" Margin="0,87,0,0">
+              wpf:Behaviors.IsTentativeFocusEnabled="True" Margin="0,87,0,0"
+              wpf:Behaviors.Activated="GazeArea_Activated">
+            
             <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
                  wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsPannable="True" wpf:Behaviors.IsTentativeFocusEnabled="True"
                  SpellCheck.IsEnabled="True" Language="en-EN"

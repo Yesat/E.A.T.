@@ -49,11 +49,11 @@ namespace E.A.T
         protected override void OnClosed(EventArgs e)
         {
             this.eyeWindow.Close();
-            if(this.spellWindow != null)
+            if (this.spellWindow != null)
             {
                 this.spellWindow.Close();
             }
-            if(this.styleWindow != null)
+            if (this.styleWindow != null)
             {
                 this.styleWindow.Close();
             }
@@ -68,17 +68,36 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)
             {
-                if(((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
-                {
-                    this.eyeWindow.Visibility = Visibility.Visible;
-                    //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                    this.eyeWindow.Focus();
-                    this.eyeWindow.setActif();
-                }                
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                //if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                //{
+                //    this.eyeWindow.Visibility = Visibility.Visible;
+                //    //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                //    this.eyeWindow.Focus();
+                //    this.eyeWindow.setActif();
+                //}
             }
-           
+
+
         }
 
+        private void MainWindown_OnPreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.RightAlt)
+            {
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            }
+        }
+
+        private void GazeArea_OnActivated(object sender, ActivationRoutedEventArgs e)
+        {
+            if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+            {
+                this.eyeWindow.Visibility = Visibility.Visible;
+                this.eyeWindow.Focus();
+                this.eyeWindow.setActif();
+            }
+        }
         /**
          * Return the spell checker of the text box
          */
@@ -209,6 +228,11 @@ namespace E.A.T
         }
 
         private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void GazeArea_Activated(object sender, ActivationRoutedEventArgs e)
         {
 
         }
