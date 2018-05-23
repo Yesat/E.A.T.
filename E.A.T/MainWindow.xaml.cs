@@ -39,7 +39,7 @@ namespace E.A.T
         {
             this.eyeWindow = new EyeTrack(this);
             InitializeComponent();
-            this.font_size.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
+            this.font_size.ItemsSource = this.fontSizeList;
             this.font_size.SelectedItem = (double)12;
         }
 
@@ -69,7 +69,6 @@ namespace E.A.T
 
             if (e.Key == Key.RightAlt)
             {
-                Console.WriteLine("On Key Down");
                 ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
             }
             if (e.Key == Key.Space)
@@ -112,8 +111,6 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)
             {
-                if (TextEdit.GetHasGaze() == true) { }
-                Console.WriteLine("On Key Up");
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
             }
             if (e.Key == Key.Space)

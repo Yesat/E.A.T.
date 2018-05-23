@@ -50,7 +50,7 @@ namespace E.A.T
                 
                 
             }
-            foreach(ListViewItem item in this.fontfamily.Items)
+            foreach(ListBoxItem item in this.fontfamily.Items)
             {
                 if(item.Name == usedFontFamily)
                 {
@@ -77,8 +77,10 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.LeftShift:
-                    ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
+                case Key.RightAlt:
+                    if (!e.IsRepeat) {
+                        ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
+                    }
                     break;
 
             }
@@ -91,7 +93,7 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.LeftShift:
+                case Key.RightAlt:
                     ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     break;
                 case Key.Space:
@@ -104,7 +106,7 @@ namespace E.A.T
 
         private void fontFamilyActiv(object sender, ActivationRoutedEventArgs e)
         {
-            this.fontfamily.SelectedItem = ((ListViewItem)sender);
+            this.fontfamily.SelectedItem = ((ListBoxItem)sender);
         }
 
         public void fontSizeActiv(object sender)
@@ -119,7 +121,7 @@ namespace E.A.T
             switch (bt_name)
             {
                 case "bt_ok":
-                    String family = ((String)((ListViewItem)this.fontfamily.SelectedItem).Content);
+                    String family = ((String)((ListBoxItem)this.fontfamily.SelectedItem).Content);
                     String size = ((TextBlock)(this.fontsize.SelectedItem)).Text.ToString();
                     this.parent.SendCommand("fontsize",size);
                     this.parent.SendCommand("fontfamily", family);

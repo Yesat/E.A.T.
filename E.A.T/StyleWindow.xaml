@@ -17,9 +17,9 @@
         <ResourceDictionary>
             <BitmapImage x:Key="Ok_img" UriSource="/Media/Images/valide.png"/>
             <BitmapImage x:Key="NOK_img" UriSource="/Media/Images/cancel.png"/>
-            <Style x:Key="ItemList" TargetType="{x:Type ListViewItem}">
+            <Style x:Key="ItemList" TargetType="{x:Type ListBoxItem}">
                 <Setter Property="wpf:Behaviors.IsGazeAware" Value="True"/>
-                <Setter Property="Height" Value="50"/>
+                <Setter Property="Height" Value="40"/>
                 <Setter Property="FontSize" Value="35"/>
                 <Setter Property="Background" Value="White"/>
                 <Setter Property="wpf:Behaviors.IsActivatable" Value="True"/>
@@ -75,14 +75,14 @@
             <ColumnDefinition Width="83*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="fontfamily" HorizontalAlignment="Left" Height="336" Margin="23,25,0,0" VerticalAlignment="Top" Width="300"
+        <ListBox x:Name="fontfamily" HorizontalAlignment="Left" Height="336" Margin="23,25,0,0" VerticalAlignment="Top" Width="300"
                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.IsPannable="True">
-            <ListViewItem x:Name="Arial" FontFamily="Arial" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Arial</ListViewItem>
-            <ListViewItem x:Name="ArialBlack" FontFamily="Arial Black" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Arial Black</ListViewItem>
-            <ListViewItem x:Name="Calibri" FontFamily="Calibri" FontSize="35" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Calibri</ListViewItem>
-            <ListViewItem x:Name="Times" FontFamily="Times New Roman" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Times New Roman</ListViewItem>
-        </ListView>
-        <ListView x:Name="fontsize" HorizontalAlignment="Left" Height="336" Margin="367,25,0,0" VerticalAlignment="Top" Width="161"
+            <ListBoxItem x:Name="Arial" FontFamily="Arial" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Arial</ListBoxItem>
+            <ListBoxItem x:Name="ArialBlack" FontFamily="Arial Black" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Arial Black</ListBoxItem>
+            <ListBoxItem x:Name="Calibri" FontFamily="Calibri" FontSize="35" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Calibri</ListBoxItem>
+            <ListBoxItem x:Name="Times" FontFamily="Times New Roman" Style="{StaticResource ItemList}" wpf:Behaviors.Activated="fontFamilyActiv">Times New Roman</ListBoxItem>
+        </ListBox>
+        <ListBox x:Name="fontsize" HorizontalAlignment="Left" Height="336" Margin="367,25,0,0" VerticalAlignment="Top" Width="166"
                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.IsPannable="True"/>
         <Button x:Name="bt_ok" Background="White" HorizontalAlignment="Left" Height="100" Margin="664,49,0,0"  VerticalAlignment="Top" Width="100" Style="{StaticResource ButtonGaze}"
             wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="ValidButton" Grid.ColumnSpan="2"

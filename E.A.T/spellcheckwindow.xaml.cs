@@ -53,11 +53,10 @@ namespace E.A.T
          * Function that return next error
          */
         public void NextCorrection()
-        {
-            //And now this broke... Oopsy.
-            this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(nextError, LogicalDirection.Forward);
+        {            
             try
             {
+                this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(nextError, LogicalDirection.Forward);
                 this.spErr = this.parent.TextEdit.GetSpellingError(this.nextError);
             }
             catch (ArgumentNullException)
@@ -187,7 +186,7 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.LeftShift:
+                case Key.RightAlt:
                     if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                     {
                         ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
@@ -204,7 +203,7 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.LeftShift:
+                case Key.RightAlt:
                     if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                     {
                         ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
