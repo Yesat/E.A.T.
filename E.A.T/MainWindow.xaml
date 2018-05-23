@@ -13,7 +13,6 @@
         
         PreviewKeyDown="MainWindow_OnPreviewKeyDown"
         PreviewKeyUp="MainWindow_OnPreviewKeyUp"
-        
         >
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
@@ -66,9 +65,22 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="LookedOn">
+                <Style.Triggers>
+                    <Trigger Property="wpf:Behaviors.HasTentativeActivationFocus" Value="True"/>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="AutoPannableSytle" TargetType="RichTextBox">
+                <Setter Property="wpf:Behaviors.IsPannable" Value="True"/>
+                <Setter Property="wpf:Behaviors.PanningProfile" Value="Vertical"/>
+                <Setter Property="wpf:Behaviors.HasTentativeActivationFocus" Value="True"/>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid x:Name="LayoutRoot" Margin="0,0,0,0">
+    <Grid x:Name="LayoutRoot" Margin="0,0,0,0"
+          wpf:Behaviors.IsActivatable="True"
+          wpf:Behaviors.IsTentativeFocusEnabled="True"
+          wpf:Behaviors.IsPannable="True">
 
 
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="0,87,0,0" Stroke="Black" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
@@ -96,17 +108,14 @@
             <ComboBox x:Name="font_size" HorizontalAlignment="Left" Height="22" Margin="186,34,0,0" VerticalAlignment="Top" Width="43"
                 DropDownClosed="size_DropDownClosed"/>
         </Grid>
-        <Grid x:Name="GazeArea"
-              wpf:Behaviors.IsActivatable="True"
-              wpf:Behaviors.IsTentativeFocusEnabled="True" Margin="0,87,0,0"
-              wpf:Behaviors.Activated="GazeArea_Activated">
-            
-            <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
-                 wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsPannable="True" wpf:Behaviors.IsTentativeFocusEnabled="True"
+        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="106,97,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
+                 Style="{StaticResource AutoPannableSytle}"
                  SpellCheck.IsEnabled="True" Language="en-EN"
                  FontFamily="Calibri" TextChanged="TextEdit_TextChanged" Width="676" Height="504"
-                 />
+        />
+        <Grid x:Name="GazeArea" Margin="0,87,0,0" Style="{StaticResource LookedOn}">
             <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="91" Height="29"/>
         </Grid>
+
     </Grid>
 </Window>

@@ -66,38 +66,40 @@ namespace E.A.T
          */
         private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.Key == Key.RightAlt)
+            {
+                Console.WriteLine("On Key Down");
+                ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
+            }
+            if (e.Key == Key.LeftAlt)
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                //if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
-                //{
-                //    this.eyeWindow.Visibility = Visibility.Visible;
-                //    //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                //    this.eyeWindow.Focus();
-                //    this.eyeWindow.setActif();
-                //}
+                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                {
+                    this.eyeWindow.Visibility = Visibility.Visible;
+                    //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                    this.eyeWindow.Focus();
+                    this.eyeWindow.setActif();
+                }
             }
-
 
         }
 
-        private void MainWindown_OnPreviewKeyUp(object sender, KeyEventArgs e)
+        private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.RightAlt)
             {
-                ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+                Console.WriteLine("On Key Up");
+                ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
+            }
+            if (e.Key == Key.LeftAlt)
+            {
+                this.eyeWindow.Visibility = Visibility.Hidden;
             }
         }
 
-        private void GazeArea_OnActivated(object sender, ActivationRoutedEventArgs e)
-        {
-            if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
-            {
-                this.eyeWindow.Visibility = Visibility.Visible;
-                this.eyeWindow.Focus();
-                this.eyeWindow.setActif();
-            }
-        }
+
         /**
          * Return the spell checker of the text box
          */
@@ -109,13 +111,7 @@ namespace E.A.T
         /**
          * This function detect when a key is release
          */
-        private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.RightAlt)
-            {
-                this.eyeWindow.Visibility = Visibility.Hidden;
-            }
-        }
+
 
         private void SpellButton_Click(object sender, RoutedEventArgs e)
         {
