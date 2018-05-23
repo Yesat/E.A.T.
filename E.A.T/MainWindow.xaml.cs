@@ -72,12 +72,12 @@ namespace E.A.T
                 Console.WriteLine("On Key Down");
                 ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
             }
-            if (e.Key == Key.LeftAlt)
+            if (e.Key == Key.Space)
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                 if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                 {
-                    if (TextEdit.GetHasActivationFocus()==true)
+                    if (TextEdit.GetHasTentativeActivationFocus()==true)
                     {
                         try
                         {
@@ -116,7 +116,7 @@ namespace E.A.T
                 Console.WriteLine("On Key Up");
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
             }
-            if (e.Key == Key.LeftAlt)
+            if (e.Key == Key.Space)
             {
                 this.eyeWindow.Visibility = Visibility.Hidden;
             }

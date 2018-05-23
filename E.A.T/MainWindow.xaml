@@ -29,7 +29,8 @@
             <Style x:Key="AutoPannableSytle" TargetType="RichTextBox">
                 <Setter Property="wpf:Behaviors.IsPannable" Value="True"/>
                 <Setter Property="wpf:Behaviors.PanningProfile" Value="Vertical"/>
-                <Setter Property="wpf:Behaviors.HasTentativeActivationFocus" Value="True"/>
+                <Setter Property="wpf:Behaviors.IsTentativeFocusEnabled" Value="True"/>
+                <Setter Property="wpf:Behaviors.IsActivatable" Value="True"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
