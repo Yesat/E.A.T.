@@ -21,50 +21,6 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <Style x:Key="RectGaze">
-                <Style.Triggers>
-                    <Trigger Property="wpf:Behaviors.HasGaze" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                    From="LightSkyBlue" To="DeepSkyBlue" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                        <Trigger.ExitActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                        From="DeepSkyBlue" To="LightSkyBlue" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.ExitActions>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="ActiRect">
-                <Style.Triggers>
-                    <Trigger Property="wpf:Behaviors.HasActivationFocus" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                    From="LightSkyBlue" To="Orange" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                        <Trigger.ExitActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                        From="Orange" To="LightSkyBlue" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.ExitActions>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
             <Style x:Key="LookedOn">
                 <Style.Triggers>
                     <Trigger Property="wpf:Behaviors.HasTentativeActivationFocus" Value="True"/>

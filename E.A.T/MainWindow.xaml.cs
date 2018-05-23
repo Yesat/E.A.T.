@@ -77,10 +77,32 @@ namespace E.A.T
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                 if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                 {
-                    this.eyeWindow.Visibility = Visibility.Visible;
-                    //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                    this.eyeWindow.Focus();
-                    this.eyeWindow.setActif();
+                    if (TextEdit.GetHasActivationFocus()==true)
+                    {
+                        try
+                        {
+                            if (this.spellWindow != null)
+                            {
+                                this.spellWindow.Close();
+                                this.spellWindow = null;
+                            }
+                            this.spellWindow = new SpellCheckWindow(this);
+                            this.spellWindow.Visibility = Visibility.Visible;
+                            this.spellWindow.Corrections();
+                        }
+                        catch (NullReferenceException)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        this.eyeWindow.Visibility = Visibility.Visible;
+                        //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                        this.eyeWindow.Focus();
+                        this.eyeWindow.setActif();
+                    }
+                    
                 }
             }
 
@@ -90,6 +112,7 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)
             {
+                if (TextEdit.GetHasGaze() == true) { }
                 Console.WriteLine("On Key Up");
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
             }
