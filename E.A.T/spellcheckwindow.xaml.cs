@@ -54,6 +54,7 @@ namespace E.A.T
          */
         public void NextCorrection()
         {
+            //And now this broke... Oopsy.
             this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(nextError, LogicalDirection.Forward);
             try
             {

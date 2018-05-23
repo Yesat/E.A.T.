@@ -49,11 +49,11 @@ namespace E.A.T
         protected override void OnClosed(EventArgs e)
         {
             this.eyeWindow.Close();
-            if(this.spellWindow != null)
+            if (this.spellWindow != null)
             {
                 this.spellWindow.Close();
             }
-            if(this.styleWindow != null)
+            if (this.styleWindow != null)
             {
                 this.styleWindow.Close();
             }
@@ -66,18 +66,62 @@ namespace E.A.T
          */
         private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.Key == Key.RightAlt)
             {
-                if(((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
-                {
-                    this.eyeWindow.Visibility = Visibility.Visible;
-                    //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                    this.eyeWindow.Focus();
-                    this.eyeWindow.setActif();
-                }                
+                Console.WriteLine("On Key Down");
+                ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
             }
-           
+            if (e.Key == Key.Space)
+            {
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                {
+                    if (TextEdit.GetHasTentativeActivationFocus()==true)
+                    {
+                        try
+                        {
+                            if (this.spellWindow != null)
+                            {
+                                this.spellWindow.Close();
+                                this.spellWindow = null;
+                            }
+                            this.spellWindow = new SpellCheckWindow(this);
+                            this.spellWindow.Visibility = Visibility.Visible;
+                            this.spellWindow.Corrections();
+                        }
+                        catch (NullReferenceException)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        this.eyeWindow.Visibility = Visibility.Visible;
+                        //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                        this.eyeWindow.Focus();
+                        this.eyeWindow.setActif();
+                    }
+                    
+                }
+            }
+
         }
+
+        private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.RightAlt)
+            {
+                if (TextEdit.GetHasGaze() == true) { }
+                Console.WriteLine("On Key Up");
+                ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
+            }
+            if (e.Key == Key.Space)
+            {
+                this.eyeWindow.Visibility = Visibility.Hidden;
+            }
+        }
+
 
         /**
          * Return the spell checker of the text box
@@ -90,13 +134,7 @@ namespace E.A.T
         /**
          * This function detect when a key is release
          */
-        private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.RightAlt)
-            {
-                this.eyeWindow.Visibility = Visibility.Hidden;
-            }
-        }
+
 
         private void SpellButton_Click(object sender, RoutedEventArgs e)
         {
@@ -203,5 +241,19 @@ namespace E.A.T
             }
         }
 
+        private void TextEdit_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void GazeArea_Activated(object sender, ActivationRoutedEventArgs e)
+        {
+
+        }
     }
 }

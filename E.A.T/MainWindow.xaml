@@ -13,7 +13,6 @@
         
         PreviewKeyDown="MainWindow_OnPreviewKeyDown"
         PreviewKeyUp="MainWindow_OnPreviewKeyUp"
-        
         >
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
@@ -22,61 +21,28 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <Style x:Key="RectGaze">
+            <Style x:Key="LookedOn">
                 <Style.Triggers>
-                    <Trigger Property="wpf:Behaviors.HasGaze" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                    From="LightSkyBlue" To="DeepSkyBlue" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                        <Trigger.ExitActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                        From="DeepSkyBlue" To="LightSkyBlue" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.ExitActions>
-                    </Trigger>
+                    <Trigger Property="wpf:Behaviors.HasTentativeActivationFocus" Value="True"/>
                 </Style.Triggers>
             </Style>
-            <Style x:Key="ActiRect">
-                <Style.Triggers>
-                    <Trigger Property="wpf:Behaviors.HasActivationFocus" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                                    From="LightSkyBlue" To="Orange" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                        <Trigger.ExitActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
-                                        From="Orange" To="LightSkyBlue" Duration="0:0:.2" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.ExitActions>
-                    </Trigger>
-                </Style.Triggers>
+            <Style x:Key="AutoPannableSytle" TargetType="RichTextBox">
+                <Setter Property="wpf:Behaviors.IsPannable" Value="True"/>
+                <Setter Property="wpf:Behaviors.PanningProfile" Value="Vertical"/>
+                <Setter Property="wpf:Behaviors.IsTentativeFocusEnabled" Value="True"/>
+                <Setter Property="wpf:Behaviors.IsActivatable" Value="True"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Margin="0,0,0,-6">
-        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Height="349" Margin="332,212,0,0" VerticalAlignment="Top" Width="450" VerticalScrollBarVisibility="Auto"
-                 wpf:Behaviors.IsGazeAware="True"
-                     SpellCheck.IsEnabled="True" Language="en-EN" Grid.ColumnSpan="2"
-                     FontFamily="Calibri"
-                     />
-        <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="222.367,566,0,0" VerticalAlignment="Top" Width="91" Height="29" Grid.Column="1"/>
-        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="0,87,0,0" Stroke="Black" VerticalAlignment="Top" Width="792" RenderTransformOrigin="0.5,0.5"/>
-        <Grid HorizontalAlignment="Left" Height="87" Margin="-4,0,0,0" VerticalAlignment="Top" Width="796" Background="LightGray" Grid.ColumnSpan="2" >
+    <Grid x:Name="LayoutRoot" Margin="0,0,0,0"
+          wpf:Behaviors.IsActivatable="True"
+          wpf:Behaviors.IsTentativeFocusEnabled="True"
+          wpf:Behaviors.IsPannable="True">
+
+
+        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="0,87,0,0" Stroke="Black" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
+        <Grid HorizontalAlignment="Left" Height="87" VerticalAlignment="Top" Margin="0,0,0,0" Background="LightGray" Width="792" >
+            <CheckBox x:Name="eyeBox" Content="Eye Tracking" HorizontalAlignment="Left" Margin="697,32,0,0" VerticalAlignment="Top" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsChecked="True"/>
             <TextBlock HorizontalAlignment="Left" Margin="11,10,0,0" TextWrapping="Wrap" Text="File" TextDecorations="Underline" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="41,37,0,0" TextWrapping="Wrap" Text="Save" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Left" Margin="41,61,0,0" TextWrapping="Wrap" Text="Open" VerticalAlignment="Top"/>
@@ -86,23 +52,27 @@
             <Button Command="ApplicationCommands.Save" Margin="10,31,760,31">
                 <Image Source="/Media/Images/disk.png" Width="16" Height="16" RenderTransformOrigin="-1.333,0.896" />
             </Button>
-            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="87" Margin="75,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="1"/>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="1"/>
 
             <TextBlock HorizontalAlignment="Left" Margin="81,13,0,0" TextWrapping="Wrap" Text="Style" TextDecorations="Underline" VerticalAlignment="Top"/>
             <ComboBox x:Name="font" HorizontalAlignment="Left" Height="22" Margin="81,34,0,0" VerticalAlignment="Top" Width="100"
                       DropDownClosed="font_DropDownClosed">
-                <ComboBoxItem x:Name="Arial" FontFamily="Arial">Arial</ComboBoxItem>
-                <ComboBoxItem x:Name="ArialBlack" FontFamily="Arial Black">Arial Black</ComboBoxItem>
-                <ComboBoxItem x:Name="Calibri" IsSelected="True" FontFamily="Calibri">Calibri</ComboBoxItem>
-                <ComboBoxItem x:Name="Times" FontFamily="Times New Roman">Times New Roman</ComboBoxItem>
+                <ComboBoxItem x:Name="Arial" FontFamily="Arial" Content="Arial"/>
+                <ComboBoxItem x:Name="ArialBlack" FontFamily="Arial Black" Content="Arial Black"/>
+                <ComboBoxItem x:Name="Calibri" IsSelected="True" FontFamily="Calibri" Content="Calibri"/>
+                <ComboBoxItem x:Name="Times" FontFamily="Times New Roman" Content="Times New Roman"/>
             </ComboBox>
             <ComboBox x:Name="font_size" HorizontalAlignment="Left" Height="22" Margin="186,34,0,0" VerticalAlignment="Top" Width="43"
-                DropDownClosed="size_DropDownClosed">
-            </ComboBox>
-
-
-
+                DropDownClosed="size_DropDownClosed"/>
         </Grid>
-        <CheckBox x:Name="eyeBox" Content="Eye Tracking" HorizontalAlignment="Left" Margin="697,32,0,0" VerticalAlignment="Top" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsChecked="True"/>
+        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="106,97,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
+                 Style="{StaticResource AutoPannableSytle}"
+                 SpellCheck.IsEnabled="True" Language="en-EN"
+                 FontFamily="Calibri" TextChanged="TextEdit_TextChanged" Width="676" Height="504"
+        />
+        <Grid x:Name="GazeArea" Margin="0,87,0,0" Style="{StaticResource LookedOn}">
+            <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="91" Height="29"/>
+        </Grid>
+
     </Grid>
 </Window>
