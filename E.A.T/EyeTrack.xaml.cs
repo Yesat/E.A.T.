@@ -50,7 +50,7 @@ namespace E.A.T
         */
         private void EyeTrack_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.RightAlt)
+            if (e.Key == Key.RightShift)
             {
                 //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
             }
@@ -61,7 +61,7 @@ namespace E.A.T
          */
         private void EyeTrack_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space)
+            if (e.Key == Key.RightShift)
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivation();
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();

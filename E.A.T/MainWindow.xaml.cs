@@ -71,7 +71,7 @@ namespace E.A.T
             {
                 ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
             }
-            if (e.Key == Key.Space)
+            if (e.Key == Key.RightShift)
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                 if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
@@ -113,7 +113,7 @@ namespace E.A.T
             {
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
             }
-            if (e.Key == Key.Space)
+            if (e.Key == Key.CapsLock)
             {
                 this.eyeWindow.Visibility = Visibility.Hidden;
             }

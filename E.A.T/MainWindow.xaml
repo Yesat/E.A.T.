@@ -32,6 +32,28 @@
                 <Setter Property="wpf:Behaviors.IsTentativeFocusEnabled" Value="True"/>
                 <Setter Property="wpf:Behaviors.IsActivatable" Value="True"/>
             </Style>
+            <Style x:Key="ActivRect">
+                <Style.Triggers>
+                    <Trigger Property="wpf:Behaviors.HasActivationFocus" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                                    From="White" To="LightGray" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)"
+                                        From="LightGray" To="White" Duration="0:0:.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="LayoutRoot" Margin="0,0,0,0"
@@ -70,20 +92,18 @@
             </Button>
             <TextBlock HorizontalAlignment="Left" Margin="321,10,0,0" TextWrapping="Wrap" Text="Revision" TextDecorations="Underline" VerticalAlignment="Top" FontSize="16"/>
         </Grid>
-        <Rectangle x:Name="menuRect" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="475" Margin="10,126,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
-        <TextBlock x:Name="menuText" HorizontalAlignment="Left" Margin="34,358,0,0" TextWrapping="Wrap" Text="Menu" VerticalAlignment="Top" FontSize="20"/>
-        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="119,126,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
+        <Grid Margin="10,126,655,10">
+            <Rectangle x:Name="menuRect" Fill="#FFF4F4F5" Height="475" Stroke="Black" VerticalAlignment="Top" Style="{StaticResource ActivRect}"/>
+            <TextBlock x:Name="menuText" Margin="10,175,10,168" TextWrapping="Wrap" 
+                       FontSize="16"><Run Text="Shift droit: active le menu. "/><LineBreak/><Run/><LineBreak/><Run Text="AltGr active le d"/><Run Text="é"/><Run Text="filement"/><Run Text="."/></TextBlock>
+        </Grid>
+        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="142,126,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
                  Style="{StaticResource AutoPannableSytle}"
                  SpellCheck.IsEnabled="True" Language="en-EN"
-                 FontFamily="Calibri" TextChanged="TextEdit_TextChanged" Width="663" Height="475"
+                 FontFamily="Calibri" TextChanged="TextEdit_TextChanged" Width="640" Height="475"
         />
-        <Grid x:Name="GazeArea" Margin="0,87,0,0" Style="{StaticResource LookedOn}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="85*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
-        
+
+
 
 
     </Grid>
