@@ -6,7 +6,7 @@
         xmlns:wpf="clr-namespace:Tobii.Interaction.Wpf;assembly=Tobii.Interaction.Net"
         xmlns:local="clr-namespace:E.A.T"
         mc:Ignorable="d"
-        Title="eyetrack menu" Height="400" Width="400"
+        Title="eyetrack menu" Height="571.176" Width="571.176"
         WindowStartupLocation="CenterScreen"
          
         WindowStyle="None"
@@ -44,31 +44,31 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid x:Name="Save" Margin="284,148,16,152">
-            <Rectangle x:Name="save" Fill="White" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource ActivRect}"
-                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation"/>
-            <Image Source="/Media/Images/disk.png" Height="100" Width="100" wpf:Behaviors.IsOccluder="False"/>
+        <Grid x:Name="Save" Margin="392,201,0,191">
+            <Rectangle x:Name="save" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
+                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation" Margin="10,0,0,0"/>
+            <Image Source="/Media/Images/disk.png" wpf:Behaviors.IsOccluder="False" Margin="10,2,25,33"/>
         </Grid>
-        <Grid x:Name="Load" Margin="10,148,290,152">
-            <Rectangle x:Name="load" Fill="White" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource ActivRect}"
+        <Grid x:Name="Load" Margin="10,201,290,99">
+            <Rectangle x:Name="load" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
                 wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation"/>
-            <Image Source="/Media/Images/folder.png" Height="100" Width="100" wpf:Behaviors.IsOccluder="False"/>
+            <Image Source="/Media/Images/folder.png" wpf:Behaviors.IsOccluder="False" Margin="10,10,121,121"/>
         </Grid>
-        <Grid x:Name="Style" Margin="144,10,156,290">
-            <Rectangle x:Name="style" Fill="White" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource ActivRect}"
-                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation"/>
-            <Image Source="/Media/Images/style.png" Height="100" Width="100" wpf:Behaviors.IsOccluder="False" RenderTransformOrigin="0.285,0.515"/>
+        <Grid x:Name="Style" Margin="231,26,203,407">
+            <Rectangle x:Name="style" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
+                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation" Margin="-23,-12,0,0"/>
+            <Image Source="/Media/Images/style.png" wpf:Behaviors.IsOccluder="False" RenderTransformOrigin="0.285,0.515" Margin="-23,-12,20,10"/>
         </Grid>
-        <Grid x:Name="SpellCheck" Margin="144,290,156,10">
-            <Rectangle x:Name="spell" Fill="White" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource ActivRect}"
+        <Grid x:Name="SpellCheck" Margin="208,399,83,-99">
+            <Rectangle x:Name="spell" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
                 wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation"/>
-            <Image Source="/Media/Images/spellcheck.png" Height="100" Width="100" wpf:Behaviors.IsOccluder="False"/>
+            <Image Source="/Media/Images/spellcheck.png" wpf:Behaviors.IsOccluder="False" Margin="10,10,138,136"/>
 
         </Grid>
-        <Grid x:Name="Exit" Margin="144,148,156,152">
-            <Rectangle x:Name="exit" Fill="White" HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100" Style="{StaticResource ActivRect}"
+        <Grid x:Name="Exit" Margin="208,201,203,210">
+            <Rectangle x:Name="exit" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
                 wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation"/>
-            <Image Source="/Media/Images/exit.png" Height="100" Width="100" wpf:Behaviors.IsOccluder="False" RenderTransformOrigin="-0.53,0.505"/>
+            <Image Source="/Media/Images/exit.png" wpf:Behaviors.IsOccluder="False" RenderTransformOrigin="-0.53,0.505" Margin="10"/>
 
 
         </Grid>
