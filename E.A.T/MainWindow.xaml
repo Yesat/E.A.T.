@@ -41,37 +41,46 @@
 
 
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="1" Margin="0,87,0,0" Stroke="Black" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-        <Grid HorizontalAlignment="Left" Height="87" VerticalAlignment="Top" Margin="0,0,0,0" Background="LightGray" Width="792" >
-            <CheckBox x:Name="eyeBox" Content="Eye Tracking" HorizontalAlignment="Left" Margin="697,32,0,0" VerticalAlignment="Top" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsChecked="True"/>
-            <TextBlock HorizontalAlignment="Left" Margin="11,10,0,0" TextWrapping="Wrap" Text="File" TextDecorations="Underline" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="41,37,0,0" TextWrapping="Wrap" Text="Save" VerticalAlignment="Top"/>
-            <TextBlock HorizontalAlignment="Left" Margin="41,61,0,0" TextWrapping="Wrap" Text="Open" VerticalAlignment="Top"/>
-            <Button Command="ApplicationCommands.Open" Margin="10,59,760,6">
-                <Image Source="/Media/Images/folder.png" Width="16" Height="16" />
+        <Grid HorizontalAlignment="Left" Height="121" VerticalAlignment="Top" Margin="0,0,0,0" Background="LightGray" Width="792">
+            <CheckBox x:Name="eyeBox" Content="Eye Tracking" HorizontalAlignment="Left" Margin="665,31,0,66" VerticalAlignment="Center" Checked="CheckBoxChanged" Unchecked="CheckBoxChanged" IsChecked="True" RenderTransformOrigin="0.093,0.667" Height="24" Width="117" VerticalContentAlignment="Center" FontSize="16"/>
+            <TextBlock HorizontalAlignment="Left" Margin="11,8,0,0" TextWrapping="Wrap" Text="File" TextDecorations="Underline" VerticalAlignment="Top" FontSize="16"/>
+            <TextBlock HorizontalAlignment="Left" Margin="51,39,0,0" TextWrapping="Wrap" Text="Save" VerticalAlignment="Top" FontSize="16"/>
+            <TextBlock HorizontalAlignment="Left" Margin="51,81,0,0" TextWrapping="Wrap" Text="Open" VerticalAlignment="Top" FontSize="16"/>
+            <Button Command="ApplicationCommands.Open" Margin="10,72,746,10">
+                <Image Source="/Media/Images/folder.png" Width="36" Height="30" />
             </Button>
-            <Button Command="ApplicationCommands.Save" Margin="10,31,760,31">
-                <Image Source="/Media/Images/disk.png" Width="16" Height="16" RenderTransformOrigin="-1.333,0.896" />
+            <Button Command="ApplicationCommands.Save" Margin="10,31,746,54" RenderTransformOrigin="0.528,0.5">
+                <Image Source="/Media/Images/disk.png" Width="36" Height="36" RenderTransformOrigin="-1.333,0.896" />
             </Button>
             <Rectangle Fill="Black" HorizontalAlignment="Left" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="1"/>
 
-            <TextBlock HorizontalAlignment="Left" Margin="81,13,0,0" TextWrapping="Wrap" Text="Style" TextDecorations="Underline" VerticalAlignment="Top"/>
-            <ComboBox x:Name="font" HorizontalAlignment="Left" Height="22" Margin="81,34,0,0" VerticalAlignment="Top" Width="100"
-                      DropDownClosed="font_DropDownClosed">
-                <ComboBoxItem x:Name="Arial" FontFamily="Arial" Content="Arial"/>
-                <ComboBoxItem x:Name="ArialBlack" FontFamily="Arial Black" Content="Arial Black"/>
+            <TextBlock HorizontalAlignment="Left" Margin="114,11,0,0" TextWrapping="Wrap" Text="Style" TextDecorations="Underline" VerticalAlignment="Top" FontSize="16"/>
+            <ComboBox x:Name="font" HorizontalAlignment="Left" Height="26" Margin="114,34,0,0" VerticalAlignment="Top" Width="105"
+                      DropDownClosed="font_DropDownClosed" FontSize="16">
+                <ComboBoxItem x:Name="Arial" FontFamily="Arial" Content="Arial" />
+                <ComboBoxItem x:Name="ArialBlack" FontFamily="Arial Black" Content="Arial Black" />
                 <ComboBoxItem x:Name="Calibri" IsSelected="True" FontFamily="Calibri" Content="Calibri"/>
                 <ComboBoxItem x:Name="Times" FontFamily="Times New Roman" Content="Times New Roman"/>
             </ComboBox>
-            <ComboBox x:Name="font_size" HorizontalAlignment="Left" Height="22" Margin="186,34,0,0" VerticalAlignment="Top" Width="43"
-                DropDownClosed="size_DropDownClosed"/>
+            <ComboBox x:Name="font_size" HorizontalAlignment="Left" Height="26" Margin="228,34,0,0" VerticalAlignment="Top" Width="55"
+                DropDownClosed="size_DropDownClosed" FontSize="16"/>
+
+            <Button x:Name="SpellButton" Click="SpellButton_Click" HorizontalAlignment="Left" Margin="321,34,0,0" VerticalAlignment="Top" Width="47" Height="43">
+                <Image Source="/Media/Images/spellcheck.png" Width="36" Height="30" />
+            </Button>
+            <TextBlock HorizontalAlignment="Left" Margin="321,10,0,0" TextWrapping="Wrap" Text="Revision" TextDecorations="Underline" VerticalAlignment="Top" FontSize="16"/>
         </Grid>
-        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="106,97,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
+        <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
                  Style="{StaticResource AutoPannableSytle}"
                  SpellCheck.IsEnabled="True" Language="en-EN"
-                 FontFamily="Calibri" TextChanged="TextEdit_TextChanged" Width="676" Height="504"
+                 FontFamily="Calibri" TextChanged="TextEdit_TextChanged" Width="772" Height="475"
         />
         <Grid x:Name="GazeArea" Margin="0,87,0,0" Style="{StaticResource LookedOn}">
-            <Button x:Name="SpellButton" Click="SpellButton_Click" Content="SpellCheck" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="91" Height="29"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="85*"/>
+            </Grid.ColumnDefinitions>
+
         </Grid>
 
     </Grid>
