@@ -228,14 +228,32 @@ namespace E.A.T
         {
             if((bool)this.eyeBox.IsChecked)
             {
-                ((App)Application.Current).Host.EnableConnection();
-                Console.WriteLine("Check");
+                try
+                {
+                    ((App)Application.Current).Host.EnableConnection();
+                    Thickness margin = TextEdit.Margin;
+                    margin.Left = 119;
+                    TextEdit.Margin = margin;
+                    TextEdit.Width = 663;
+                    menuRect.Visibility = Visibility.Visible;
+                    menuText.Visibility = Visibility.Visible;
+                }
+                catch (NullReferenceException) { }
+                
             }
             else
             {
-                ((App)Application.Current).Host.DisableConnection();
-                Console.WriteLine("Uncheck");
-            }
+                try { 
+                    ((App)Application.Current).Host.DisableConnection();
+                    menuRect.Visibility = Visibility.Hidden;
+                    menuText.Visibility = Visibility.Hidden;
+                    Thickness margin = TextEdit.Margin;
+                    margin.Left = 10;
+                    TextEdit.Width = 772;
+                    TextEdit.Margin = margin;
+                }
+                catch (NullReferenceException) { }
+        }
         }
 
         private void TextEdit_TextChanged(object sender, TextChangedEventArgs e)
