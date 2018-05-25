@@ -232,9 +232,9 @@ namespace E.A.T
                 {
                     ((App)Application.Current).Host.EnableConnection();
                     Thickness margin = TextEdit.Margin;
-                    margin.Left = 119;
+                    margin.Left = 142;
                     TextEdit.Margin = margin;
-                    TextEdit.Width = 663;
+                    TextEdit.Width = 640;
                     menuRect.Visibility = Visibility.Visible;
                     menuText.Visibility = Visibility.Visible;
                 }
@@ -249,7 +249,7 @@ namespace E.A.T
                     menuText.Visibility = Visibility.Hidden;
                     Thickness margin = TextEdit.Margin;
                     margin.Left = 10;
-                    TextEdit.Width = 772;
+                    TextEdit.Width = 769;
                     TextEdit.Margin = margin;
                 }
                 catch (NullReferenceException) { }
