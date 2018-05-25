@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tobii.Interaction;
+using Tobii.Interaction.Framework;
 using Tobii.Interaction.Wpf;
 
 namespace E.A.T
@@ -112,6 +114,10 @@ namespace E.A.T
             if (e.Key == Key.RightAlt)
             {
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
+                GazePointDataStream pointStream = ((App)Application.Current).Host.Streams.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
+                pointStream.IsEnabled = true;
+                pointStream.Next += (s, eye) => EyeCaret(pointStream, eye);
+                //pointStream.IsEnabled = false;
             }
             if (e.Key == Key.RightShift)
             {
@@ -268,6 +274,13 @@ namespace E.A.T
 
         private void GazeArea_Activated(object sender, ActivationRoutedEventArgs e)
         {
+
+        }
+
+        private void EyeCaret(GazePointDataStream stream, StreamData<GazePointData> eye)
+        {
+            stream.IsEnabled = false;
+            Console.WriteLine(eye.Data.X.ToString()+":"+ eye.Data.Y.ToString());
 
         }
     }

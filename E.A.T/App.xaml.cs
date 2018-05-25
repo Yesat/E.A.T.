@@ -23,6 +23,7 @@ namespace E.A.T
             get { return _host; }
         }
 
+
         protected override void OnStartup(StartupEventArgs e)
         {
             // Everything starts with initializing Host, which manages connection to the 
@@ -32,6 +33,7 @@ namespace E.A.T
 
             // We need to instantiate InteractorAgent so it could control lifetime of the interactors.
             _agent = _host.InitializeWpfAgent();
+            
         }
 
         protected override void OnExit(ExitEventArgs e)
