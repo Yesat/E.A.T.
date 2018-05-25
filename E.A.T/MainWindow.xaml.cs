@@ -113,7 +113,7 @@ namespace E.A.T
             {
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
             }
-            if (e.Key == Key.CapsLock)
+            if (e.Key == Key.RightShift)
             {
                 this.eyeWindow.Visibility = Visibility.Hidden;
             }
