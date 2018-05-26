@@ -78,14 +78,14 @@
 
             <TextBlock HorizontalAlignment="Left" Margin="114,11,0,0" TextWrapping="Wrap" Text="Style" TextDecorations="Underline" VerticalAlignment="Top" FontSize="16"/>
             <ComboBox x:Name="font" HorizontalAlignment="Left" Height="26" Margin="114,34,0,0" VerticalAlignment="Top" Width="105"
-                      DropDownClosed="font_DropDownClosed" FontSize="16">
+                      DropDownClosed="Font_DropDownClosed" FontSize="16">
                 <ComboBoxItem x:Name="Arial" FontFamily="Arial" Content="Arial" />
                 <ComboBoxItem x:Name="ArialBlack" FontFamily="Arial Black" Content="Arial Black" />
                 <ComboBoxItem x:Name="Calibri" IsSelected="True" FontFamily="Calibri" Content="Calibri"/>
                 <ComboBoxItem x:Name="Times" FontFamily="Times New Roman" Content="Times New Roman"/>
             </ComboBox>
             <ComboBox x:Name="font_size" HorizontalAlignment="Left" Height="26" Margin="228,34,0,0" VerticalAlignment="Top" Width="55"
-                DropDownClosed="size_DropDownClosed" FontSize="16"/>
+                DropDownClosed="Size_DropDownClosed" FontSize="16"/>
 
             <Button x:Name="SpellButton" Click="SpellButton_Click" HorizontalAlignment="Left" Margin="321,34,0,0" VerticalAlignment="Top" Width="47" Height="43">
                 <Image Source="/Media/Images/spellcheck.png" Width="36" Height="30" />

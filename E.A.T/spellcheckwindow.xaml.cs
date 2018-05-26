@@ -79,9 +79,11 @@ namespace E.A.T
             foreach (string sugg in this.spErr.Suggestions)
             {
                 //Creation of the item
-                TextBlock word = new TextBlock();
-                word.Text = sugg;
-                word.Name = "sugg" + i.ToString();//Id of the suggestion
+                TextBlock word = new TextBlock
+                {
+                    Text = sugg,
+                    Name = "sugg" + i.ToString()//Id of the suggestion
+                };
                 word.SetIsActivatable(true);
                 word.SetIsTentativeFocusEnabled(true);
                 word.SetActivatedCommand(new ItemCommand(this,"spell"));
@@ -209,7 +211,7 @@ namespace E.A.T
                         ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     }
                     break;
-                case Key.Space:
+                case Key.RightShift:
                     if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                     {
                         ((App)Application.Current).Host.Commands.Input.SendActivation();

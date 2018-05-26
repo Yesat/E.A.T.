@@ -68,13 +68,12 @@ namespace E.A.T
          */
         private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-
-            if (e.Key == Key.RightAlt)
+            switch (e.Key)
             {
+            case Key.RightAlt:
                 ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
-            }
-            if (e.Key == Key.RightShift)
-            {
+                break;
+            case Key.RightShift:
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                 if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                 {
@@ -87,9 +86,11 @@ namespace E.A.T
                                 this.spellWindow.Close();
                                 this.spellWindow = null;
                             }
-                            this.spellWindow = new SpellCheckWindow(this);
-                            this.spellWindow.Visibility = Visibility.Visible;
-                            this.spellWindow.Corrections();
+                                this.spellWindow = new SpellCheckWindow(this)
+                                {
+                                    Visibility = Visibility.Visible
+                                };
+                                this.spellWindow.Corrections();
                         }
                         catch (NullReferenceException)
                         {
@@ -101,27 +102,29 @@ namespace E.A.T
                         this.eyeWindow.Visibility = Visibility.Visible;
                         //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                         this.eyeWindow.Focus();
-                        this.eyeWindow.setActif();
+                        this.eyeWindow.SetActif();
                     }
-                    
+                
                 }
+                break;
             }
 
         }
 
         private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.RightAlt)
+            switch (e.Key)
             {
+            case Key.RightAlt:
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
                 GazePointDataStream pointStream = ((App)Application.Current).Host.Streams.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
                 pointStream.IsEnabled = true;
                 pointStream.Next += (s, eye) => EyeCaret(pointStream, eye);
                 //pointStream.IsEnabled = false;
-            }
-            if (e.Key == Key.RightShift)
-            {
+                break;
+            case Key.RightShift:
                 this.eyeWindow.Visibility = Visibility.Hidden;
+                break;
             }
         }
 
@@ -148,8 +151,10 @@ namespace E.A.T
                     this.spellWindow.Close();
                     this.spellWindow = null;
                 }
-                this.spellWindow = new SpellCheckWindow(this);
-                this.spellWindow.Visibility = Visibility.Visible;
+                this.spellWindow = new SpellCheckWindow(this)
+                {
+                    Visibility = Visibility.Visible
+                };
                 this.spellWindow.Corrections();
             }
             catch (NullReferenceException)
@@ -160,14 +165,14 @@ namespace E.A.T
 
         }
 
-        private void font_DropDownClosed(object sender, EventArgs e)
+        private void Font_DropDownClosed(object sender, EventArgs e)
         {
             ComboBox cmb = (ComboBox)sender;
             fontBoxHandle = !cmb.IsDropDownOpen;
-            setFontFamily();
+            SetFontFamily();
         }
 
-        private void setFontFamily()
+        private void SetFontFamily()
         {
             this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
             ComboBoxItem item = this.font.SelectedItem as ComboBoxItem;
@@ -175,14 +180,14 @@ namespace E.A.T
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
         }
 
-        private void size_DropDownClosed(object sender, EventArgs e)
+        private void Size_DropDownClosed(object sender, EventArgs e)
         {
             ComboBox cmb = (ComboBox)sender;
             fontBoxHandle = !cmb.IsDropDownOpen;
-            setFontSize();
+            SetFontSize();
         }
 
-        private void setFontSize()
+        private void SetFontSize()
         {
             this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
             double item = (double)this.font_size.SelectedItem;
@@ -197,8 +202,10 @@ namespace E.A.T
                     this.SpellButton_Click(this, null);
                     break;
                 case "style":
-                    this.styleWindow = new StyleWindow(this);
-                    this.styleWindow.Visibility = Visibility.Visible;
+                    this.styleWindow = new StyleWindow(this)
+                    {
+                        Visibility = Visibility.Visible
+                    };
                     break;
                 case "fontsize":
                     this.TextEdit.Focus();

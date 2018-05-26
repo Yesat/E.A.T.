@@ -93,8 +93,8 @@
                 <Image Source="{StaticResource Exit_img}"/>
             </StackPanel>
         </Button>
-        <ListView x:Name="suggestions" HorizontalAlignment="Left" Height="336" Margin="23,25,0,0" VerticalAlignment="Top" Width="588"
+        <ListView x:Name="suggestions" HorizontalAlignment="Left" Height="327" Margin="23,25,0,0" VerticalAlignment="Top" Width="588"
                   wpf:Behaviors.IsGazeAware="True" wpf:Behaviors.IsPannable="True"/>
-
+        <TextBlock HorizontalAlignment="Left" Height="33" Margin="23,357,0,0" TextWrapping="Wrap" Text="Valider la sélection en regardant et pressant AltGr" FontSize="20" VerticalAlignment="Top" Width="588"/>
     </Grid>
 </Window>

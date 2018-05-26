@@ -35,8 +35,10 @@ namespace E.A.T
             foreach (double size in this.parent.FontSizeList)
             {
                 //Creation of the item
-                TextBlock word = new TextBlock();
-                word.Text = size.ToString();
+                TextBlock word = new TextBlock
+                {
+                    Text = size.ToString()
+                };
                 word.SetIsActivatable(true);
                 word.SetIsTentativeFocusEnabled(true);
                 word.SetActivatedCommand(new ItemCommand(this, "style"));
@@ -96,7 +98,7 @@ namespace E.A.T
                 case Key.RightAlt:
                     ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     break;
-                case Key.Space:
+                case Key.RightShift:
                     ((App)Application.Current).Host.Commands.Input.SendActivation();
                     ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                     break;
@@ -104,12 +106,12 @@ namespace E.A.T
             }
         }
 
-        private void fontFamilyActiv(object sender, ActivationRoutedEventArgs e)
+        private void FontFamilyActiv(object sender, ActivationRoutedEventArgs e)
         {
             this.fontfamily.SelectedItem = ((ListBoxItem)sender);
         }
 
-        public void fontSizeActiv(object sender)
+        public void FontSizeActiv(object sender)
         {
             this.fontsize.SelectedItem = ((ActivatedArgs)sender).Interactor.Element;
         }

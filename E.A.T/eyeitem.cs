@@ -38,7 +38,7 @@ namespace E.A.T
                     ((SpellCheckWindow)vm).ItemOfList(parameter);
                     break;
                 case "style":
-                    ((StyleWindow)vm).fontSizeActiv(parameter);
+                    ((StyleWindow)vm).FontSizeActiv(parameter);
                     break;
             }
         }

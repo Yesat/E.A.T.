@@ -46,28 +46,28 @@
     <Grid>
         <Grid x:Name="Save" Margin="400,185,0,0" Height="150" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150">
             <Rectangle x:Name="save" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
-                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation" Margin="0,0,0,0" Grid.RowSpan="2"/>
+                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="Activation" Margin="0,0,0,0" Grid.RowSpan="2"/>
             <Image Source="/Media/Images/disk.png" wpf:Behaviors.IsOccluder="False" Margin="10" Grid.RowSpan="2"/>
         </Grid>
         <Grid x:Name="Load" Margin="10,185,0,0" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Rectangle x:Name="load" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
-                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation" Grid.ColumnSpan="2"/>
+                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="Activation" Grid.ColumnSpan="2"/>
             <Image Source="/Media/Images/folder.png" wpf:Behaviors.IsOccluder="False" Margin="10" Grid.ColumnSpan="2"/>
         </Grid>
         <Grid x:Name="Style" Margin="205,10,0,0" HorizontalAlignment="Left" Width="150" Height="150" VerticalAlignment="Top">
             <Rectangle x:Name="style" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
-                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation" Grid.RowSpan="3"/>
+                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="Activation" Grid.RowSpan="3"/>
             <Image Source="/Media/Images/style.png" wpf:Behaviors.IsOccluder="False" RenderTransformOrigin="0.285,0.515" Margin="10"/>
         </Grid>
         <Grid x:Name="SpellCheck" Margin="205,360,0,0" Height="150" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150">
             <Rectangle x:Name="spell" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
-                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation"/>
+                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="Activation"/>
             <Image Source="/Media/Images/spellcheck.png" wpf:Behaviors.IsOccluder="False" Margin="10"/>
 
         </Grid>
         <Grid x:Name="Exit" Margin="0,185,10,0" HorizontalAlignment="Right" Width="150" Height="150" VerticalAlignment="Top">
             <Rectangle x:Name="exit" Fill="White" HorizontalAlignment="Left" Height="150" Stroke="Black" VerticalAlignment="Top" Width="150" Style="{StaticResource ActivRect}"
-                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="activation"/>
+                wpf:Behaviors.IsActivatable="True" wpf:Behaviors.IsTentativeFocusEnabled="True" wpf:Behaviors.Activated="Activation"/>
             <Image Source="/Media/Images/exit.png" wpf:Behaviors.IsOccluder="False" RenderTransformOrigin="-0.53,0.505" Margin="10"/>
 
 

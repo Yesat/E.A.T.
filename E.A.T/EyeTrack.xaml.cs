@@ -41,7 +41,7 @@ namespace E.A.T
             base.OnClosed(e);
         }
 
-        public void setActif()
+        public void SetActif()
         {
             ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
         }
@@ -70,7 +70,7 @@ namespace E.A.T
             }
         }
 
-        private void activation(object sender, ActivationRoutedEventArgs e)
+        private void Activation(object sender, ActivationRoutedEventArgs e)
         {
             String name = ((Rectangle)sender).Name;
             switch (name)
