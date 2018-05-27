@@ -37,7 +37,10 @@ namespace E.A.T
          */
         protected override void OnClosed(EventArgs e)
         {
-            ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+            {
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
+            }
             base.OnClosed(e);
         }
 
@@ -69,7 +72,10 @@ namespace E.A.T
          */
         public void ToCorrect()
         {
-            ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+            if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+            {
+                ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+            }
             this.suggestions.Items.Clear();
             int i = 0;
             Style style = this.FindResource("ItemList") as Style;
