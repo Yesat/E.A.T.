@@ -52,13 +52,13 @@ namespace E.A.T
         }
 
         [DllImport("User32.dll")]
-        private static extern bool SetCursorPos(int X, int Y);
+        private static extern bool SetCursorPos(int X, int Y);//Set the position of the mouse
 
         [DllImport("user32.dll")]
-        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);//Similate a mouse event
 
         [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out POINT lpPoint);
+        public static extern bool GetCursorPos(out POINT lpPoint);//Return the position of the mouse
 
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
         private const int MOUSEEVENTF_LEFTUP = 0x0004;
@@ -96,16 +96,16 @@ namespace E.A.T
         private void MainWindow_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.Key == Key.RightAlt)
+            if (e.Key == Key.RightAlt)//Panning
             {
                 ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
             }
-            if (e.Key == Key.RightShift)
+            if (e.Key == Key.RightShift)//Eye menu or spell check
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)//Check if eye tracker is enable
                 {
-                    if (TextEdit.GetHasTentativeActivationFocus()==true)
+                    if (TextEdit.GetHasTentativeActivationFocus()==true)//If user look at text box, open spell check
                     {
                         try
                         {
@@ -123,10 +123,9 @@ namespace E.A.T
                             return;
                         }
                     }
-                    else
+                    else//Otherwise open the eye menu
                     {
                         this.eyeWindow.Visibility = Visibility.Visible;
-                        //((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                         this.eyeWindow.Focus();
                         this.eyeWindow.setActif();
                     }
@@ -136,17 +135,20 @@ namespace E.A.T
 
         }
 
+        /**
+         * This function detect when a key is release
+         */
         private void MainWindow_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.RightAlt)
+            if (e.Key == Key.RightAlt)//Panning
             {
                 ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
+                //Get the eye position
                 GazePointDataStream pointStream = ((App)Application.Current).Host.Streams.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
                 pointStream.IsEnabled = true;
                 pointStream.Next += (s, eye) => EyeCaret(pointStream, eye);
-                //pointStream.IsEnabled = false;
             }
-            if (e.Key == Key.RightShift)
+            if (e.Key == Key.RightShift)//Eye menu
             {
                 this.eyeWindow.Visibility = Visibility.Hidden;
             }
@@ -161,11 +163,9 @@ namespace E.A.T
             return this.TextEdit.SpellCheck;
         }
 
-        /**
-         * This function detect when a key is release
+        /*
+         * Open the spell checker when the user click the button
          */
-
-
         private void SpellButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -187,6 +187,9 @@ namespace E.A.T
 
         }
 
+        /*
+         * Change the font family when the dopdown menu is closed
+         */
         private void font_DropDownClosed(object sender, EventArgs e)
         {
             ComboBox cmb = (ComboBox)sender;
@@ -194,14 +197,9 @@ namespace E.A.T
             setFontFamily();
         }
 
-        private void setFontFamily()
-        {
-            this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
-            ComboBoxItem item = this.font.SelectedItem as ComboBoxItem;
-            FontFamily nf = new FontFamily(item.Content.ToString());
-            this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
-        }
-
+        /*
+         * Change the font size when the dopdown menu is closed
+         */
         private void size_DropDownClosed(object sender, EventArgs e)
         {
             ComboBox cmb = (ComboBox)sender;
@@ -209,6 +207,20 @@ namespace E.A.T
             setFontSize();
         }
 
+        /*
+         * Set the font family of the text box
+         */
+        private void setFontFamily()
+        {
+            this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
+            ComboBoxItem item = this.font.SelectedItem as ComboBoxItem;
+            FontFamily nf = new FontFamily(item.Content.ToString());
+            this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
+        }
+       
+        /*
+         * Set the font size of the text box
+         */
         private void setFontSize()
         {
             this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
@@ -216,23 +228,26 @@ namespace E.A.T
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontSizeProperty, item);
         }
 
+        /*
+         * Execute the command that a child window send
+         */
         public void SendCommand(String cmd, String arg)
         {
             switch (cmd)
             {
-                case "spell":
+                case "spell"://Open spell check
                     this.SpellButton_Click(this, null);
                     break;
-                case "style":
+                case "style"://Open style window
                     this.styleWindow = new StyleWindow(this);
                     this.styleWindow.Visibility = Visibility.Visible;
                     break;
-                case "fontsize":
+                case "fontsize"://Change the font size
                     this.TextEdit.Focus();
                     this.TextEdit.Selection.ApplyPropertyValue(Inline.FontSizeProperty, Convert.ToDouble(arg));
                     this.font_size.SelectedItem = Convert.ToDouble(arg);
                     break;
-                case "fontfamily":
+                case "fontfamily"://Change the font family
                     this.TextEdit.Focus();
                     FontFamily nf = new FontFamily(arg);
                     this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
@@ -244,19 +259,23 @@ namespace E.A.T
                         }
                     }
                     break;
-                case "exit":
+                case "exit"://Exit the program
                     this.Close();
                     break;
-                case "save":
+                case "save"://Save the curent document
                     this.Save_Executed(this, null);
                     break;
-                case "load":
+                case "load"://Open an other document
                     this.Open_Executed(this, null);
                     break;
                     
             }
         }
 
+        /**
+         * This function monitor the modification of the eyetrack check box
+         * Resize the textbox and menu and enable/disable the eyetrack
+         */
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {
             if((bool)this.eyeBox.IsChecked)
@@ -304,18 +323,23 @@ namespace E.A.T
 
         }
 
+        /**
+         * This function take the gaze position and do a mouse left click at this position do reset the caret position
+         */
         private void EyeCaret(GazePointDataStream stream, StreamData<GazePointData> eye)
         {
             stream.IsEnabled = false;
+            //Get the gaze position
             uint X = (uint)eye.Data.X;
             uint Y = (uint)eye.Data.Y;
             POINT lpPoint;
+            //Get mouse position
             GetCursorPos(out lpPoint);
             int oldX = lpPoint.X;
             int oldY = lpPoint.Y;
-            SetCursorPos((int)eye.Data.X, (int)eye.Data.Y);
-            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
-            SetCursorPos(oldX, oldY);
+            SetCursorPos((int)eye.Data.X, (int)eye.Data.Y);//Move the mouse where we gaze
+            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);//left click
+            SetCursorPos(oldX, oldY);//Reset the mouse at the old position
 
 
         }

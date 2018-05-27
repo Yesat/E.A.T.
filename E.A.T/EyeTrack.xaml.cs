@@ -41,6 +41,9 @@ namespace E.A.T
             base.OnClosed(e);
         }
 
+        /*
+         * Enable the activation node of tobii
+         */
         public void setActif()
         {
             ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
@@ -61,38 +64,43 @@ namespace E.A.T
          */
         private void EyeTrack_OnPreviewKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.RightShift)
+            if (e.Key == Key.RightShift)//HIde the eye menu
             {
                 ((App)Application.Current).Host.Commands.Input.SendActivation();
                 ((App)Application.Current).Host.Commands.Input.SendActivationModeOff();
                 this.Visibility = Visibility.Hidden;
-                //this.Close();
             }
         }
 
+        /*
+         * Get the option selected by user and perform an action
+         */
         private void activation(object sender, ActivationRoutedEventArgs e)
         {
             String name = ((Rectangle)sender).Name;
             switch (name)
             {
-                case "save":
+                case "save"://Save the document
                     this.parent.SendCommand("save",null);
                     break;
-                case "load":
+                case "load"://Open an other document
                     this.parent.SendCommand("load", null);
                     break;
-                case "style":
+                case "style"://Open style window
                     this.parent.SendCommand("style", null);
                     break;
-                case "spell":
+                case "spell"://Open spell checker
                     this.parent.SendCommand("spell", null);
                     break;
-                case "exit":
+                case "exit"://Exit the application
                     this.parent.SendCommand("exit", null); ;
                     break;
             }
         }
 
+        /*
+         * Return the parent window of the object
+         */
         public MainWindow GetParent()
         {
             return this.parent;

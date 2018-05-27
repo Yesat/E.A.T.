@@ -128,7 +128,6 @@ namespace E.A.T
                     this.Close();
                     break;
                 case "bt_ignore": //Ignore on go to the next available error
-                                  //TO DO: check if there is a list of spelling errors
                     this.spErr.IgnoreAll();
                     try
                     {
@@ -153,7 +152,6 @@ namespace E.A.T
                     {
                         string choice = ((TextBlock)this.suggestions.SelectedItem).Text;
                         this.spErr.Correct(choice);
-                        //TO DO: check if there is a list of spelling errors
                         try
                         {
                             this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(this.nextError, LogicalDirection.Forward);
@@ -186,7 +184,7 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.RightAlt:
+                case Key.RightAlt://Panning
                     if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                     {
                         ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
@@ -203,13 +201,13 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.RightAlt:
+                case Key.RightAlt://Panning
                     if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                     {
                         ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     }
                     break;
-                case Key.Space:
+                case Key.Space://Select the option that the user look
                     if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                     {
                         ((App)Application.Current).Host.Commands.Input.SendActivation();

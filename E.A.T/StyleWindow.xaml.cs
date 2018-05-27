@@ -50,6 +50,7 @@ namespace E.A.T
                 
                 
             }
+            //Creation of the list of font family
             foreach(ListBoxItem item in this.fontfamily.Items)
             {
                 if(item.Name == usedFontFamily)
@@ -77,7 +78,7 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.RightAlt:
+                case Key.RightAlt://Panning
                     if (!e.IsRepeat) {
                         ((App)Application.Current).Host.Commands.Input.SendPanningBegin();//active eye panning
                     }
@@ -93,10 +94,10 @@ namespace E.A.T
         {
             switch (e.Key)
             {
-                case Key.RightAlt:
+                case Key.RightAlt://Panning
                     ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     break;
-                case Key.Space:
+                case Key.Space://Item and button selection
                     ((App)Application.Current).Host.Commands.Input.SendActivation();
                     ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                     break;
@@ -104,30 +105,39 @@ namespace E.A.T
             }
         }
 
+        /*
+         * Get the font family selected by user
+         */
         private void fontFamilyActiv(object sender, ActivationRoutedEventArgs e)
         {
             this.fontfamily.SelectedItem = ((ListBoxItem)sender);
         }
 
+        /*
+         * Get the font size selected by user
+         */
         public void fontSizeActiv(object sender)
         {
             this.fontsize.SelectedItem = ((ActivatedArgs)sender).Interactor.Element;
         }
 
+        /*
+         * Get the button activated by the user and perform an action
+         */
         private void ValidButton(object sender, ActivationRoutedEventArgs e)
         {
             string bt_name = ((Button)sender).Name;
 
             switch (bt_name)
             {
-                case "bt_ok":
+                case "bt_ok"://Valide the user choice and send to the text box the change
                     String family = ((String)((ListBoxItem)this.fontfamily.SelectedItem).Content);
                     String size = ((TextBlock)(this.fontsize.SelectedItem)).Text.ToString();
                     this.parent.SendCommand("fontsize",size);
                     this.parent.SendCommand("fontfamily", family);
                     this.Close();
                     break;
-                case "bt_quit":
+                case "bt_quit"://Exit the font change without modification
                     this.Close();
                     break;
             }
