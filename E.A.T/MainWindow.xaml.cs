@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,6 +37,32 @@ namespace E.A.T
                 return this.fontSizeList;
             }
         }
+
+        //Mouse interaction for textbox scroll
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+
+            public static implicit operator Point(POINT point)
+            {
+                return new Point(point.X, point.Y);
+            }
+        }
+
+        [DllImport("User32.dll")]
+        private static extern bool SetCursorPos(int X, int Y);
+
+        [DllImport("user32.dll")]
+        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out POINT lpPoint);
+
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
+        //
 
         public MainWindow()
         {
@@ -280,7 +307,16 @@ namespace E.A.T
         private void EyeCaret(GazePointDataStream stream, StreamData<GazePointData> eye)
         {
             stream.IsEnabled = false;
-            Console.WriteLine(eye.Data.X.ToString()+":"+ eye.Data.Y.ToString());
+            uint X = (uint)eye.Data.X;
+            uint Y = (uint)eye.Data.Y;
+            POINT lpPoint;
+            GetCursorPos(out lpPoint);
+            int oldX = lpPoint.X;
+            int oldY = lpPoint.Y;
+            SetCursorPos((int)eye.Data.X, (int)eye.Data.Y);
+            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+            SetCursorPos(oldX, oldY);
+
 
         }
     }
