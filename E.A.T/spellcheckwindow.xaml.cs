@@ -57,15 +57,9 @@ namespace E.A.T
          */
         public void NextCorrection()
         {            
-            try
-            {
-                this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(nextError, LogicalDirection.Forward);
-                this.spErr = this.parent.TextEdit.GetSpellingError(this.nextError);
-            }
-            catch (ArgumentNullException)
-            {
-                this.Close();
-            }
+             this.nextError = this.parent.TextEdit.GetNextSpellingErrorPosition(nextError, LogicalDirection.Forward);
+             this.spErr = this.parent.TextEdit.GetSpellingError(this.nextError);
+            
         }
         /**
          * Function that start the spelling correction
@@ -97,10 +91,18 @@ namespace E.A.T
                 i++;
             }
             if (this.suggestions.Items.Count == 0)
-            {
-                this.spErr.IgnoreAll();
-                this.NextCorrection();
-                this.ToCorrect();
+            {                
+                try
+                {
+                    this.spErr.IgnoreAll();
+                    this.NextCorrection();
+                    this.ToCorrect();
+                }
+                catch (ArgumentNullException)
+                {
+                    this.Close();
+                }               
+                
             }
 
         }
@@ -213,7 +215,7 @@ namespace E.A.T
                         ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     }
                     break;
-                case Key.Space://Select the option that the user look
+                case Key.RightShift://Select the option that the user look
                     if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                     {
                         ((App)Application.Current).Host.Commands.Input.SendActivation();

@@ -97,7 +97,7 @@ namespace E.A.T
                 case Key.RightAlt://Panning
                     ((App)Application.Current).Host.Commands.Input.SendPanningEnd();//disable eye panning
                     break;
-                case Key.Space://Item and button selection
+                case Key.RightShift://Item and button selection
                     ((App)Application.Current).Host.Commands.Input.SendActivation();
                     ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
                     break;
