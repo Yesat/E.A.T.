@@ -21,7 +21,7 @@
 %\usepackage{url}
 %\usepackage{verbatim}
 %\usepackage{moreverb}
-%\usepackage{listings}
+\usepackage{listings}
 %\usepackage{fancyhdr}
 %\usepackage{wrapfig}
 %\usepackage{color}
@@ -36,6 +36,7 @@
 
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{blindtext}
 
 \title{\huge{\textbf{Eye-Assisted Text Editing }\\ Future User Interfaces}}
 \author{Gwenael \textsc{Gendre}, Lionel \textsc{Ieri}, Romain \textsc{Maillard} \\
@@ -86,7 +87,25 @@ The only specific hardware we use is the \textit{Tobii Eye Tracker 4C}. It is a 
 To be able to access the \textit{Tobii} gaze data, we used the \textit{Tobii Core Standard Development Kit}\footnote{https://developer.tobii.com/tobii-core-sdk/} and its provided \textit{API}s. We then decided not to implement a plugin for an already existing text editor but rather to create our own one. The \textit{Windows Presentation Foundation}\footnote{https://msdn.microsoft.com/fr-fr/library/aa970268(v=vs.100).aspx} was all we needed: windows creation with built-in text fields and style modification. The \textit{WPF} uses the \textit{XAML} language. 
 
 \subsection{Implementation}
+The integration of the \textit{Tobii} in our application is quiet easy. There is a good synergy between WPF and the Tobii SDK. We can add some parameter to the element of a window to add the capability to use the eye tracker.
 
+\begin{lstlisting}
+<Button x:Name="validation"
+wpf:Behaviors.IsActivatable="True"
+wpf:Behaviors.IsTentativeFocusEnabled="True"
+wpf:Behaviors.Activated="activation_function">
+\end{lstlisting}
+
+The above example code add to a button the possibility to be activated by the eye tracker. When he is activate, he call the function \textit{activation\_function}.
+
+\subsubsection{In the app}
+We use the eye tracker in our application as follow:
+\begin{itemize}
+\item Scroll the text
+\item Quick menu for the main function of the application
+\item Select the style of the text
+\item Correct spelling mistakes
+\end{itemize}
 
 \section{Data analysis}
 
