@@ -21,7 +21,7 @@
 %\usepackage{url}
 %\usepackage{verbatim}
 %\usepackage{moreverb}
-%\usepackage{listings}
+\usepackage{listings}
 %\usepackage{fancyhdr}
 %\usepackage{wrapfig}
 %\usepackage{color}
@@ -36,6 +36,7 @@
 
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{blindtext}
 
 \title{\huge{\textbf{Eye-Assisted Text Editing }\\ Future User Interfaces}}
 \author{Gwenael \textsc{Gendre}, Lionel \textsc{Ieri}, Romain \textsc{Maillard} \\
@@ -57,8 +58,8 @@ During the \textit{Future User Interfaces} course at the University of Fribourg,
 \section{Outline}
 
 \subsection{Motivation}
-The idea we had was to facilitate the text editing of documents, mostly for users that do not use the many shortcuts implemented in almost all of the modern text editing softwares. These shortcuts are very powerful in some cases (see e.g. \textit{Vim}) but can be really hard to master, because there is not an exhaustive list and because the user is not pushed towards them. 
-A user wanting to edit text will therefore have to open menus and select the right options with the mouse, either to change the font or its size, to navigate the spellchecker or to save and send the file. The user has to put his hands away from the keyboard and loses some time for each of these movements. 
+The idea we had was to facilitate the text editing of documents, mostly for users that do not use the many shortcuts implemented in almost all of the modern text editing softwares. These shortcuts are very powerful in some cases (see e.g. \textit{Vim}) but can be really hard to master, because there is not an exhaustive list and because the user is not pushed towards them. \\
+A user wanting to edit text will therefore have to open menus and select the right options with the mouse, either to change the font or its size, to navigate the spellchecker or to save and send the file. The user has to put his hands away from the keyboard and loses some time for each of these movements. \\
 We wanted to build an interface that could allow such users to have an easier way of editing their documents. 
 
 \subsection{Concept}
@@ -86,7 +87,25 @@ The only specific hardware we use is the \textit{Tobii Eye Tracker 4C}. It is a 
 To be able to access the \textit{Tobii} gaze data, we used the \textit{Tobii Core Standard Development Kit}\footnote{https://developer.tobii.com/tobii-core-sdk/} and its provided \textit{API}s. We then decided not to implement a plugin for an already existing text editor but rather to create our own one. The \textit{Windows Presentation Foundation}\footnote{https://msdn.microsoft.com/fr-fr/library/aa970268(v=vs.100).aspx} was all we needed: windows creation with built-in text fields and style modification. The \textit{WPF} uses the \textit{XAML} language. 
 
 \subsection{Implementation}
+The integration of the \textit{Tobii} in our application is quiet easy. There is a good synergy between WPF and the Tobii SDK. We can add some parameter to the element of a window to add the capability to use the eye tracker.
 
+\begin{lstlisting}
+<Button x:Name="validation"
+wpf:Behaviors.IsActivatable="True"
+wpf:Behaviors.IsTentativeFocusEnabled="True"
+wpf:Behaviors.Activated="activation_function">
+\end{lstlisting}
+
+The above example code add to a button the possibility to be activated by the eye tracker. When he is activate, he call the function \textit{activation\_function}.
+
+\subsubsection{In the app}
+We use the eye tracker in our application as follow:
+\begin{itemize}
+\item Scroll the text
+\item Quick menu for the main function of the application
+\item Select the style of the text
+\item Correct spelling mistakes
+\end{itemize}
 
 \section{Data analysis}
 
@@ -95,6 +114,19 @@ We hope to see a significant amelioration in the text editing quality by using o
 \[H_0: \text{There is no increase in speed by editing text with the eye tracker.}\] 
 along with the alternative hypothesis: 
 \[H_1: \text{Editing text with eye tracker support is faster than without it.}\]
+
+\subsection{Protocol}
+
+\subsubsection{Discovery}
+We let the user take a couple of tries with the system to avoid stressing them during the actual experiment and to let them learn how to use it. 
+
+\subsubsection{Test}
+The user was first asked to copy a given short text with a precise formatting, e.g. different fonts and font sizes. Then we asked him to correct some spelling mistakes on another text, which may require scrolling. This was done either with the eye-tracking interface or with the classical one. \\
+We then swapped to the other modality choice and asked the user to repeat the task with texts of similar length. \\
+Both parts were timed, we even recorded some users to count the number of times they have to move their hands between keyboard and mouse. 
+
+\subsubsection{Evaluation}
+The user then filled a form to gather their feedback and impression. This form touched upon personal preferences, potential (does the user feel like he could become more proficient with more experience), issues and ideas. 
 
 \subsection{Experiment}
 
