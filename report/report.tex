@@ -58,8 +58,8 @@ During the \textit{Future User Interfaces} course at the University of Fribourg,
 \section{Outline}
 
 \subsection{Motivation}
-The idea we had was to facilitate the text editing of documents, mostly for users that do not use the many shortcuts implemented in almost all of the modern text editing softwares. These shortcuts are very powerful in some cases (see e.g. \textit{Vim}) but can be really hard to master, because there is not an exhaustive list and because the user is not pushed towards them. \\
-A user wanting to edit text will therefore have to open menus and select the right options with the mouse, either to change the font or its size, to navigate the spellchecker or to save and send the file. The user has to put his hands away from the keyboard and loses some time for each of these movements. \\
+The idea we had was to facilitate the text editing of documents, mostly for users that do not use the many shortcuts implemented in almost all of the modern text editing softwares. These shortcuts are very powerful in some cases (see e.g. \textit{Vim}) but these solutions have extremely long lists of shortcuts and macro that are not user friendly.\\
+A user wanting to edit text will therefore have to open menus and select the right options with the mouse, either to change the font or its size, to navigate the spellchecker or to save and send the file. The user has to put his hands away from the keyboard and loses time and comfort for each of these movements. \\
 We wanted to build an interface that could allow such users to have an easier way of editing their documents. 
 
 \subsection{Concept}
@@ -81,7 +81,8 @@ We use \textit{decision-level fusion}: we merge lately the two modalities (the g
 \section{Architecture}
 
 \subsection{Hardware}
-The only specific hardware we use is the \textit{Tobii Eye Tracker 4C}. It is a small device that can be fixed on your monitor and plugged in a \textit{USB} port, on the form of a bar. It will then record the position of your eyes and the region of your screen you are gazing at. 
+The main hardware used for this project is a \textit{Tobii EyeTracker 4C}, a USB eye tracker using an infrared camera to track the gaze position and translate it to the screen. This system is relatively low cost and works well enough for many usages as unlike more expensive system, the point of the \textit{4C} isn't to properly track every single movments but more to determine the different area gazed upon. 
+And for our porject we will use it in coordination with a standard keyboard.
 
 \subsection{Software}
 To be able to access the \textit{Tobii} gaze data, we used the \textit{Tobii Core Standard Development Kit}\footnote{https://developer.tobii.com/tobii-core-sdk/} and its provided \textit{API}s. We then decided not to implement a plugin for an already existing text editor but rather to create our own one. The \textit{Windows Presentation Foundation}\footnote{https://msdn.microsoft.com/fr-fr/library/aa970268(v=vs.100).aspx} was all we needed: windows creation with built-in text fields and style modification. The \textit{WPF} uses the \textit{XAML} language. 
