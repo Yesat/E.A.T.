@@ -47,9 +47,16 @@ namespace E.A.T
 
         public void Corrections()
         {
-            this.nextError = this.parent.TextEdit.Document.ContentStart;
-            this.NextCorrection();
-            this.ToCorrect();
+            try
+            {
+                this.nextError = this.parent.TextEdit.Document.ContentStart;
+                this.NextCorrection();
+                this.ToCorrect();
+            }
+            catch (ArgumentNullException)
+            {
+                this.Close();
+            }
 
         }
         /**
