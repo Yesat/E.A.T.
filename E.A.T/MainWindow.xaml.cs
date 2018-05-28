@@ -98,37 +98,45 @@ namespace E.A.T
 
             if (e.Key == Key.RightAlt)//Panning
             {
-                ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
+                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                {
+                    ((App)Application.Current).Host.Commands.Input.SendPanningBegin();
+                }
+                    
             }
             if (e.Key == Key.RightShift)//Eye menu or spell check
             {
-                ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
-                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)//Check if eye tracker is enable
+                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
                 {
-                    if (TextEdit.GetHasTentativeActivationFocus()==true)//If user look at text box, open spell check
+                    ((App)Application.Current).Host.Commands.Input.SendActivationModeOn();
+                    if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)//Check if eye tracker is enable
                     {
-                        try
+                        if (TextEdit.GetHasTentativeActivationFocus() == true)//If user look at text box, open spell check
                         {
-                            if (this.spellWindow != null)
+                            try
                             {
-                                this.spellWindow.Close();
-                                this.spellWindow = null;
+                                if (this.spellWindow != null)
+                                {
+                                    this.spellWindow.Close();
+                                    this.spellWindow = null;
+                                }
+                                this.spellWindow = new SpellCheckWindow(this);
+                                this.spellWindow.Visibility = Visibility.Visible;
+                                this.spellWindow.Corrections();
                             }
-                            this.spellWindow = new SpellCheckWindow(this);
-                            this.spellWindow.Visibility = Visibility.Visible;
-                            this.spellWindow.Corrections();
+                            catch (NullReferenceException)
+                            {
+                                return;
+                            }
                         }
-                        catch (NullReferenceException)
+                        else//Otherwise open the eye menu
                         {
-                            return;
+                            this.eyeWindow.Visibility = Visibility.Visible;
+                            this.eyeWindow.Focus();
+                            this.eyeWindow.setActif();
                         }
                     }
-                    else//Otherwise open the eye menu
-                    {
-                        this.eyeWindow.Visibility = Visibility.Visible;
-                        this.eyeWindow.Focus();
-                        this.eyeWindow.setActif();
-                    }
+                
                     
                 }
             }
@@ -142,11 +150,15 @@ namespace E.A.T
         {
             if (e.Key == Key.RightAlt)//Panning
             {
-                ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
-                //Get the eye position
-                GazePointDataStream pointStream = ((App)Application.Current).Host.Streams.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
-                pointStream.IsEnabled = true;
-                pointStream.Next += (s, eye) => EyeCaret(pointStream, eye);
+                if (((App)Application.Current).Host.Context.ConnectionState == Tobii.Interaction.Client.ConnectionState.Connected)
+                {
+                    ((App)Application.Current).Host.Commands.Input.SendPanningEnd();
+                    //Get the eye position
+                    GazePointDataStream pointStream = ((App)Application.Current).Host.Streams.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
+                    pointStream.IsEnabled = true;
+                    pointStream.Next += (s, eye) => EyeCaret(pointStream, eye);
+                }
+                
             }
             if (e.Key == Key.RightShift)//Eye menu
             {
