@@ -1,0 +1,15 @@
+Evaluation protocole
+
+- Discovery
+    Let the user take a couple of try with the system to avoid stressing them during the actual test
+- test
+    The user will be asked to write and format a short text from a provided text from news paper, a short story,...
+    This will be done by using either the eye tracked version or not at first.
+    Then we'll swap the methode and ask them to repeat the task with a different, but similar length text.
+    Both these tasks will be timed and saved, with some user being recorded to try to see the number of hand movement of the keyboard.
+
+- Evaluation
+    The user will be then to fill a form to gather their feedback and impression.
+    This form will touch upon, personal preferences, potential (does the user feel like they could become more proficient with time), issues and ideas.
+    Outside of this user feedback, we will go over the time taken, with the user.
+    
