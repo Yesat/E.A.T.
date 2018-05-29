@@ -227,6 +227,11 @@ namespace E.A.T
             this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
             ComboBoxItem item = this.font.SelectedItem as ComboBoxItem;
             FontFamily nf = new FontFamily(item.Content.ToString());
+            TextPointer tp = this.TextEdit.CaretPosition.GetInsertionPosition(LogicalDirection.Forward);
+            Run r = new Run("", tp);
+            r.FontFamily = nf;
+            r.FontSize = (double)this.font_size.SelectedItem;
+            this.TextEdit.CaretPosition = r.ElementEnd;
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
         }
        
@@ -235,9 +240,18 @@ namespace E.A.T
          */
         private void setFontSize()
         {
+            
             this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
             double item = (double)this.font_size.SelectedItem;
+            TextPointer tp = this.TextEdit.CaretPosition.GetInsertionPosition(LogicalDirection.Forward);
+            ComboBoxItem family = this.font.SelectedItem as ComboBoxItem;
+            FontFamily nf = new FontFamily(family.Content.ToString());
+            Run r = new Run("",tp);
+            r.FontSize = item;
+            r.FontFamily = nf;
+            this.TextEdit.CaretPosition = r.ElementEnd;
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontSizeProperty, item);
+            
         }
 
         /*
@@ -255,21 +269,22 @@ namespace E.A.T
                     this.styleWindow.Visibility = Visibility.Visible;
                     break;
                 case "fontsize"://Change the font size
-                    this.TextEdit.Focus();
-                    this.TextEdit.Selection.ApplyPropertyValue(Inline.FontSizeProperty, Convert.ToDouble(arg));
+
                     this.font_size.SelectedItem = Convert.ToDouble(arg);
+                    this.TextEdit.Focus();
+                    this.setFontSize();
                     break;
                 case "fontfamily"://Change the font family
-                    this.TextEdit.Focus();
-                    FontFamily nf = new FontFamily(arg);
-                    this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
-                    foreach(ComboBoxItem item in this.font.Items)
+                    foreach (ComboBoxItem item in this.font.Items)
                     {
-                        if(item.Content.ToString() == arg)
+                        if (item.Content.ToString() == arg)
                         {
                             this.font.SelectedItem = item;
                         }
                     }
+                    this.TextEdit.Focus();
+                    this.setFontFamily();
+                    
                     break;
                 case "exit"://Exit the program
                     this.Close();

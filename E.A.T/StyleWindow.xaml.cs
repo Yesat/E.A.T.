@@ -26,7 +26,7 @@ namespace E.A.T
             this.parent = parent;            
             InitializeComponent();
             String usedFontFamily = ((ComboBoxItem)this.parent.font.SelectedItem).Name;
-            String usedFontSize = this.parent.TextEdit.FontSize.ToString();
+            String usedFontSize = this.parent.font_size.SelectedItem.ToString();
             Style style = this.FindResource("ItemList") as Style;
             this.fontsize.ItemContainerStyle = style;
             /**
