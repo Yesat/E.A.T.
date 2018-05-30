@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper, twoside]{article}
+\documentclass[12pt, a4paper]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -38,6 +38,7 @@
 \usepackage{caption}
 \usepackage{blindtext}
 
+
 \title{\huge{\textbf{Eye-Assisted Text Editing }\\ Future User Interfaces}}
 \author{Gwenael \textsc{Gendre}, Lionel \textsc{Ieri}, Romain \textsc{Maillard} \\
 	Teacher: Prof. Dr. Denis \textsc{Lalanne}}
@@ -58,11 +59,11 @@ During the \textit{Future User Interfaces} course at the University of Fribourg,
 
 \subsection{Motivation}
 The idea we had was to facilitate the text editing of documents, mostly for users that do not use the many shortcuts implemented in almost all of the modern text editing softwares. These shortcuts are very powerful in some cases (see e.g. \textit{Vim}) but these solutions have extremely long lists of shortcuts and macro that are not user friendly.\\
-A user wanting to edit text will therefore have to open menus and select the right options with the mouse, either to change the font or its size, to navigate the spellchecker or to save and send the file. The user has to put his hands away from the keyboard and loses time and comfort for each of these movements. \\
+A user wanting to edit text will therefore have to open menus and select the right options with the mouse, either to change the font or its size, to navigate the spell checker or to save and send the file. The user has to put his hands away from the keyboard and loses time and comfort for each of these movements. \\
 We wanted to build an interface that could allow such users to have an easier way of editing their documents. 
 
 \subsection{Concept}
-Our project has a custom text editor built in, in which the user can choose to activate -- or deactivate -- the eye assisted text editing. Without eye-tracking, the user has a text editor with the usual commands: one can type text, change the font and its size, save the file or open another one, and spellcheck the typed text. By checking the corresponding box, the user activates the eye assistance. The mouse controls still remain available, but more possibilities appear: as stated on the left on the window, there are two keys that can be pressed: \textit{AltGr} activates scrolling: look at the top or the bottom of the text field and press \textit{AltGr}, the field will scroll up or down. When the user presses the \textit{Right Shift} key, two things can happen. Either he was not looking at the text field, and a menu with big icons opens, easier to focus with your gaze. There are five options in this menu: open a file, saving the current text field as a file, open the style editor, open the spell checker or exit the application. The style editor allows to change the font and the size of the text, while the spellchecker displays the suggestions for the word. Or the user was in fact looking at the text field, and the spellcheck directly opens. Note that the options have to be selected by pressing the \textit{Right Shift} key again. 
+Our project has a custom text editor built in, in which the user can choose to activate -- or deactivate -- the eye assisted text editing. Without eye-tracking, the user has a text editor with the usual commands: one can type text, change the font and its size, save the file or open another one, and spell check the typed text. By checking the corresponding box, the user activates the eye assistance. The mouse controls still remain available, but more possibilities appear: as stated on the left on the window, there are two keys that can be pressed: \textit{Alt Gr} activates scrolling: look at the top or the bottom of the text field and press \textit{Alt Gr}, the field will scroll up or down. When the user presses the \textit{Right Shift} key, two things can happen. Either he was not looking at the text field, and a menu with big icons opens, easier to focus with your gaze. There are five options in this menu: open a file, saving the current text field as a file, open the style editor, open the spell checker or exit the application. The style editor allows to change the font and the size of the text, while the spell checker displays the suggestions for the word. Or the user was in fact looking at the text field, and the spell check directly opens. Note that the options have to be selected by pressing the \textit{Right Shift} key again. 
 
 \subsection{CASE/CARE}
 According to the \textit{CASE} model, our application is synergistic: we use the two modalities (keyboard and eye) in parallel, and both accomplish the same action. (See Figure \ref{case-model})
@@ -79,7 +80,7 @@ We use \textit{decision-level fusion}: we merge lately the two modalities (the g
 
 \section{Architecture}
 
-\subsection{Hardware}
+\subsection{Hardware} \label{hardware}
 The main hardware used for this project is a \textit{Tobii EyeTracker 4C}, a USB eye tracker using an infrared camera to track the gaze position and translate it to the screen. This system is relatively low cost and works well enough for many usages, as unlike more expensive systems, the point of the \textit{4C} isn't to properly track every single movement but more to determine the different areas gazed upon. 
 And for our project we will use it in coordination with a standard keyboard.
 
@@ -89,7 +90,7 @@ To be able to access the \textit{Tobii} gaze data, we used the \textit{Tobii Cor
 \subsection{Implementation}
 The integration of the \textit{Tobii} in our application is quiet easy. There is a good synergy between \textit{WPF} and the \textit{Tobii SDK}. We can add some parameter to the element of a window to add the capacity to use the eye tracker.
 
-\begin{lstlisting}
+\begin{lstlisting}[frame=single, language=XML]
 <Button x:Name="validation"
 wpf:Behaviors.IsActivatable="True"
 wpf:Behaviors.IsTentativeFocusEnabled="True"
@@ -118,7 +119,7 @@ along with the alternative hypothesis:
 \subsection{Protocol}
 
 \subsubsection{Discovery}
-We let the user take a couple of tries with the system to avoid stressing them during the actual experiment and to let them learn how to use it. 
+After giving the user a brief introduction on eye tracking with the \textit{4C} we go through the calibration process and let them play a bit with the system. Then we introduce our software and let them play a bit with it to get used to it.
 
 \subsubsection{Test}
 The user was first asked to copy a given short text with a precise formatting, e.g. different fonts and font sizes. Then we asked him to correct some spelling mistakes on another text, which may require scrolling. This was done either with the eye-tracking interface or with the classical one. \\
@@ -128,12 +129,57 @@ The time for both parts was measured.
 \subsubsection{Evaluation}
 The user then filled a form to gather their feedback and impression. This form touched upon personal preferences, potential (does the user feel like he could become more proficient with more experience), issues and ideas. 
 
-\subsection{Experiment}
+\subsection{Experiment and results}
 
-\subsection{Analysis and results}
+\subsubsection{Quantitative measures}
+To better evaluate our results we take the ratio between the time done using the mouse and the time using the eye tracker, to compensate for the different typing speeds.
 
+Our results (shown in Figure \ref{dataPlot}) show us that most people are slower with the eye tracking modality. 
+At a quick glance, we can already see that nobody was faster using the eye tracker. With an mean ratio of 1.83, the tester are clearly slower with it. The extrema are 1.35 and 2.8. \\
+Checking with a QQplot (see Figure \ref{qqplot}) we can't really conclude that our data is normal enough, which is confirmed by the results of a Shapiro-Wilk  Test.
+\begin{lstlisting}[frame=single, language=R]
+	Shapiro-Wilk normality test
+
+data:  Ratio.Text
+W = 0.88409, p-value = 0.206
+\end{lstlisting}
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=.35]{histText}
+\includegraphics[scale=.35]{boxText}
+\caption{Distribution of our results}
+\label{dataPlot}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[scale=.3]{qqplot}
+\caption{QQ plot for our measure}
+\label{qqplot}
+\end{figure}
+
+\subsubsection{User feedback} \label{feedback}
+In the user feedback given in the form, the trend of "\textit{Keyboard and mouse are a better combination of modalities for text editing}" is a bit toned down: all users rated all three impressions -- ease of use, swiftness, comfort -- with at least an \textit{Average} rating, and most votes were between \textit{Average} and \textit{Excellent}. The preference of users still go to the keyboard and mouse combination in most cases. \\
+Even though all but one of them felt that they experienced issues with eye tracking, what really gives us hope for such a project is that no user thinks he cannot improve, even if some may not be sure about it. 
 
 \section{Conclusion}
+
+\subsection{Review}
+
+In this whole experiment, we have seen that our interface is not yet better than the conventional interface. We believe, as do most of the users, that our usage of eye tracking can get better and that interfaces using eye tracking in some way will one day make text editing easier for everybody. \\
+One fact that we observed is that the users often had their first contact with Eye tracking only a few minutes before our experiment. This may explain some of the difference for the time needed to edit text with eye tracking. As said in section \ref{feedback} about feedback, the users mostly thought they could improve. It could be interesting to make this experiment again with more experimented subjects. \\
+Our experience was a bit exaggerated, as we forced the user to do multiple style changes in a row; which is not usual in the documents one can easily type. This factor causes the time difference to be higher than it would have with less editing and more typing, which is not affected by eye tracking. 
+It is still to be noted that all users did not use the mouse at all for editing with eye tracking. This is a positive note for our interface. 
+One must keep in mind the fact that our application was meant to be a quick testing tool, not a complete standalone text editor. Therefore it suffered from some problems that would have been avoided by creating a plugin for an existing editor. \\
+We can still extract a few reasons that made our application not fully benefit from eye tracking -- and some possible solutions to them: \\
+Our text editor was quite basic: we adapted a bit the size of some menus, but a list menu does not feel really adequate for eye selection. We could adapt the menus, for example with circular menus or bigger tiles. As already explained in section \ref{hardware}, the \textit{Tobii Eye Tracker 4C} is not exceptionally precise. Excluding calibration problems, we still need to adapt our application to the device's capabilities.\\
+To follow on the last point, we kept some simple shortcuts for menu generation and simple element disposition. It could be possible to either find better dispositions and shortcuts by testing different configurations or by allowing the user to choose them to fit his preferences. One example is the spell checker feedback: by opening the spell check, the user masks the text and does not see the sentence being corrected. We could display the few words before and after the wrongly spelled word in the suggestion box. 
+
+\subsection{Personal feedback}
+After some discussion, it appeared that all three of us had some great pleasure in doing this project! We discovered the \textit{Tobii Eye Tracker}, we had fun playing with it, and seeing our application work with eye control was a great reward. The \textit{WPF} also turned to be really practical and easy to use, it's a tool we may use again in the future. \\
+
  
 \end{document}
 
+ 
