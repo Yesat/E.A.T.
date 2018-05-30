@@ -94,8 +94,8 @@
         </Grid>
         <Grid Margin="10,126,655,10">
             <Rectangle x:Name="menuRect" Fill="#FFF4F4F5" Height="465" Stroke="Black" VerticalAlignment="Top" Style="{StaticResource GazeRect}" wpf:Behaviors.IsGazeAware="True"/>
-            <TextBlock x:Name="menuText" Margin="10,175,10,168" TextWrapping="Wrap" 
-                       FontSize="16"><Run Text="Shift droit: active le menu. "/><LineBreak/><Run/><LineBreak/><Run Text="AltGr active le d"/><Run Text="é"/><Run Text="filement"/><Run Text="."/></TextBlock>
+            <TextBlock x:Name="menuText" Margin="10,175,10.286,140.143" TextWrapping="Wrap" 
+                       FontSize="16"><Run Text="Shift droit: active le menu et la correction. "/><LineBreak/><Run/><LineBreak/><Run Text="AltGr active le d"/><Run Text="é"/><Run Text="filement"/><Run Text="."/></TextBlock>
         </Grid>
         <RichTextBox x:Name="TextEdit" HorizontalAlignment="Left" Margin="142,126,0,0" VerticalAlignment="Top" VerticalScrollBarVisibility="Auto"
                  Style="{StaticResource AutoPannableSytle}"
