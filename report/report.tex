@@ -62,7 +62,7 @@ A user wanting to edit text will therefore have to open menus and select the rig
 We wanted to build an interface that could allow such users to have an easier way of editing their documents. 
 
 \subsection{Concept}
-Our project has a custom text editor built in, in which the user can choose to activate -- or deactivate -- the eye assisted text editing. Without eye-tracking, the user has a text editor with the usual commands: one can type text, change the font and its size, save the file or open another one, and spellcheck the typed text. By checking the corresponding box, the user activates the eye assistance. The mouse controls still remain available, but more possibilities appear: as stated on the left on the window, there are two keys that can be pressed: \textit{AltGr} activates scrolling: look at the top or the bottom of the text field and press \textit{AltGr}, the field will scroll up or down. When the user presses the \textit{Right Shift} key, two things can happen. Either he was not looking at the text field, and a menu with big icons open, easier to focus with your gaze. There are five options in this menu: open a file, saving the current text field as a file, open the style editor, open the spell checker or exit the application. The style editor allows to change the font and the size of the text, while the spellchecker displays the suggestions for the word. Or the user was in fact looking at the text field, and the spellcheck directly opens. Note that the options have to be selected by pressing the \textit{Right Shift} key again. 
+Our project has a custom text editor built in, in which the user can choose to activate -- or deactivate -- the eye assisted text editing. Without eye-tracking, the user has a text editor with the usual commands: one can type text, change the font and its size, save the file or open another one, and spellcheck the typed text. By checking the corresponding box, the user activates the eye assistance. The mouse controls still remain available, but more possibilities appear: as stated on the left on the window, there are two keys that can be pressed: \textit{AltGr} activates scrolling: look at the top or the bottom of the text field and press \textit{AltGr}, the field will scroll up or down. When the user presses the \textit{Right Shift} key, two things can happen. Either he was not looking at the text field, and a menu with big icons opens, easier to focus with your gaze. There are five options in this menu: open a file, saving the current text field as a file, open the style editor, open the spell checker or exit the application. The style editor allows to change the font and the size of the text, while the spellchecker displays the suggestions for the word. Or the user was in fact looking at the text field, and the spellcheck directly opens. Note that the options have to be selected by pressing the \textit{Right Shift} key again. 
 
 \subsection{CASE/CARE}
 According to the \textit{CASE} model, our application is synergistic: we use the two modalities (keyboard and eye) in parallel, and both accomplish the same action. (See Figure \ref{case-model})
@@ -72,7 +72,7 @@ According to the \textit{CASE} model, our application is synergistic: we use the
 \label{case-model}
 \end{figure}
 \newline
-The \textit{CASE} model classified the machine-side of the fusion, now the \textit{CARE} model is about the human-side of fusion and classifies the usability properties: in our application, the two modalities are complementary. We need to use both of them to use correctly the application. 
+The \textit{CASE} model classified the machine-side of the fusion, now the \textit{CARE} model is about the human-side of fusion and classifies the usability properties: in our application, the two modalities are complementary. We need to use both of them at the same time to use correctly the application. 
 
 \subsection{Fusion and fission}
 We use \textit{decision-level fusion}: we merge lately the two modalities (the gaze position and the key pressing) because they are weakly coupled. On the fission side, it is a bit hard to have two different outputs for the user: we kept the feedback visual by highlighting the gazed-at element and by letting the menus appear directly upon a key press.  
@@ -80,8 +80,8 @@ We use \textit{decision-level fusion}: we merge lately the two modalities (the g
 \section{Architecture}
 
 \subsection{Hardware}
-The main hardware used for this project is a \textit{Tobii EyeTracker 4C}, a USB eye tracker using an infrared camera to track the gaze position and translate it to the screen. This system is relatively low cost and works well enough for many usages as unlike more expensive system, the point of the \textit{4C} isn't to properly track every single movments but more to determine the different area gazed upon. 
-And for our porject we will use it in coordination with a standard keyboard.
+The main hardware used for this project is a \textit{Tobii EyeTracker 4C}, a USB eye tracker using an infrared camera to track the gaze position and translate it to the screen. This system is relatively low cost and works well enough for many usages, as unlike more expensive systems, the point of the \textit{4C} isn't to properly track every single movement but more to determine the different areas gazed upon. 
+And for our project we will use it in coordination with a standard keyboard.
 
 \subsection{Software}
 To be able to access the \textit{Tobii} gaze data, we used the \textit{Tobii Core Standard Development Kit}\footnote{https://developer.tobii.com/tobii-core-sdk/} and its provided \textit{API}s. We then decided not to implement a plugin for an already existing text editor but rather to create our own one. The \textit{Windows Presentation Foundation}\footnote{https://msdn.microsoft.com/fr-fr/library/aa970268(v=vs.100).aspx} was all we needed: windows creation with built-in text fields and style modification. The \textit{WPF} uses the \textit{XAML} language. 
@@ -96,10 +96,10 @@ wpf:Behaviors.IsTentativeFocusEnabled="True"
 wpf:Behaviors.Activated="activation_function">
 \end{lstlisting}
 
-The above example of code a button to be activated by the eye tracker. When it is activated, it calls the function \textit{activation\_function}.
+The above example of code allows a button to be activated by the eye tracker. When it is activated, it calls the function \textit{activation\_function}.
 
 \subsubsection{In the app}
-We use the eye tracker in our application as follow:
+We use the eye tracker in our application as follows:
 \begin{itemize}
 \item Scroll the text
 \item Quick menu for the main function of the application
@@ -122,7 +122,7 @@ We let the user take a couple of tries with the system to avoid stressing them d
 
 \subsubsection{Test}
 The user was first asked to copy a given short text with a precise formatting, e.g. different fonts and font sizes. Then we asked him to correct some spelling mistakes on another text, which may require scrolling. This was done either with the eye-tracking interface or with the classical one. \\
-We then swapped to the other modality choice and asked the user to repeat the task with texts of similar length. \\
+We then swapped to the other modality choice and asked the user to repeat the task on the same text. \\
 Both parts were timed, we even recorded some users to count the number of times they have to move their hands between keyboard and mouse. 
 
 \subsubsection{Evaluation}
@@ -133,6 +133,7 @@ The user then filled a form to gather their feedback and impression. This form t
 \subsection{Analysis and results}
 
 \section{Conclusion}
+
  
 \end{document}
 
