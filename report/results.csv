@@ -1,7 +1,9 @@
-Id,Groupe,Mouse Text,Mouse Spell,Eye Text,Eye Spell,User comments
-0,1,03:26.3,00:14.6,07:14.7,00:41.6,Hard to select the item in the list
-1,2,02:49.8,00:10.8,05:01.0,00:22.6,Hard to select top item
-3,1,02:43.5,00:13.7,04:14.4,00:15.1,Issue with the calibration, but good potential
-4,2,06:38.5,00:15.8,09:02:7,0:35:3,hard to select top item
-5,2,02:45:8,0:10.6,05:16:5,0:26.3,hard to be precise
-6,1,04:30.3,0:17.7,08:40.5,0:23.2, precision was bad but fun to use
+"","Groupe","Mouse Text","Mouse Spell","Eye Text","Eye Spell","User comments"
+0,1,206,14,434,41,"Hard to select the item in the list"
+1,2,169,10,301,22,"Hard to select top item"
+3,1,184,13,254,15,"Issue with the calibration but good potentiaL"
+4,2,398,15,562,35,"hard to select top item"
+5,2,165,10,316,26,"hard to be precise"
+6,1,270,17,520,23,"precision was bad but fun to use"
+7,1,147,12,411,20,"Issue to sellect certain elements."
+8,2,324,14,437,27,"Trouble with the shortcuts. And tirying for the eyes."
