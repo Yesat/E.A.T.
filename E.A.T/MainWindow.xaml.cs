@@ -227,11 +227,14 @@ namespace E.A.T
             this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
             ComboBoxItem item = this.font.SelectedItem as ComboBoxItem;
             FontFamily nf = new FontFamily(item.Content.ToString());
-            TextPointer tp = this.TextEdit.CaretPosition.GetInsertionPosition(LogicalDirection.Forward);
-            Run r = new Run("", tp);
-            r.FontFamily = nf;
-            r.FontSize = (double)this.font_size.SelectedItem;
-            this.TextEdit.CaretPosition = r.ElementEnd;
+            if (this.TextEdit.Selection.IsEmpty)
+            {
+                TextPointer tp = this.TextEdit.CaretPosition.GetInsertionPosition(LogicalDirection.Forward);
+                Run r = new Run("", tp);
+                r.FontFamily = nf;
+                r.FontSize = (double)this.font_size.SelectedItem;
+                this.TextEdit.CaretPosition = r.ElementEnd;
+            }            
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, nf);
         }
        
@@ -243,13 +246,16 @@ namespace E.A.T
             
             this.TextEdit.Focus();// We need to take the focus for the case where there is no selection (otherwise the font is not take in account when we type text)
             double item = (double)this.font_size.SelectedItem;
-            TextPointer tp = this.TextEdit.CaretPosition.GetInsertionPosition(LogicalDirection.Forward);
-            ComboBoxItem family = this.font.SelectedItem as ComboBoxItem;
-            FontFamily nf = new FontFamily(family.Content.ToString());
-            Run r = new Run("",tp);
-            r.FontSize = item;
-            r.FontFamily = nf;
-            this.TextEdit.CaretPosition = r.ElementEnd;
+            if (this.TextEdit.Selection.IsEmpty)
+            {
+                TextPointer tp = this.TextEdit.CaretPosition.GetInsertionPosition(LogicalDirection.Forward);
+                ComboBoxItem family = this.font.SelectedItem as ComboBoxItem;
+                FontFamily nf = new FontFamily(family.Content.ToString());
+                Run r = new Run("", tp);
+                r.FontSize = item;
+                r.FontFamily = nf;
+                this.TextEdit.CaretPosition = r.ElementEnd;
+            }            
             this.TextEdit.Selection.ApplyPropertyValue(Inline.FontSizeProperty, item);
             
         }
