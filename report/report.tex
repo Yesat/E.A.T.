@@ -10,7 +10,7 @@
 \usepackage{soul}
 \usepackage{ulem}
 %\usepackage{eurosym}
-\label{FormResults}
+\usepackage{hyperref}
 
 %\usepackage{bookman}
 %\usepackage{charter}
@@ -88,7 +88,9 @@ The main hardware used for this project is a \textit{Tobii EyeTracker 4C}, a USB
 And for our project we will use it in coordination with a standard keyboard.
 
 \subsection{Software}
-To be able to access the \textit{Tobii} gaze data, we used the \textit{Tobii Core Standard Development Kit}\footnote{\url{https://developer.tobii.com/tobii-core-sdk/}} and its provided \textit{API}s. We then decided not to implement a plugin for an already existing text editor but rather to create our own one. The \textit{Windows Presentation Foundation}\footnote{\url{https://msdn.microsoft.com/fr-fr/library/aa970268(v=vs.100).aspx}} was all we needed: windows creation with built-in text fields and style modification. The \textit{WPF} uses the \textit{XAML} language. \footnote{Our code and a released version is available on \href{https://github.com/marom17/E.A.T./releases/tag/1.0.5}{GitHub} under the MIT license}
+To be able to access the \textit{Tobii} gaze data, we used the \textit{Tobii Core Standard Development Kit} \footnote{\url{https://developer.tobii.com/tobii-core-sdk/}} 
+and its provided \textit{API}s. 
+We then decided not to implement a plugin for an already existing text editor but rather to create our own one. The \textit{Windows Presentation Foundation}\footnote{\url{https://msdn.microsoft.com/fr-fr/library/aa970268(v=vs.100).aspx}} was all we needed: windows creation with built-in text fields and style modification. The \textit{WPF} uses the \textit{XAML} language. \footnote{Our code and a released version is available on \href{https://github.com/marom17/E.A.T./releases/tag/1.0.5}{GitHub} under the MIT license}
 
 \subsection{Implementation}
 The integration of the \textit{Tobii} in our application is quiet easy. There is a good synergy between \textit{WPF} and the \textit{Tobii SDK}. We can add some parameter to the element of a window to add the capacity to use the eye tracker.
@@ -164,8 +166,8 @@ Mouse & Eye tracking&Ratio E/M\\
 165&316&1.92\\
 324&437&1.35\\
 \end{tabular}
-\label{timetable}
 \caption{Results in second}
+\label{timetable}
 \end{table}
 
 
@@ -194,12 +196,12 @@ After some discussion, it appeared that all three of us had some great pleasure 
 \section{Feedback form results}
 \label{FormResults}
 \begin{figure}[H]
-\includegraphics[scale =.6]{Speed}
-\includegraphics[scale =.6]{EaseOfUse}
-\includegraphics[scale =.6]{Comfort}
-\includegraphics[scale =.6]{Preference}
-\includegraphics[scale =.6]{Improvement}
-\includegraphics[scale =.6]{Issues}
+\includegraphics[scale =.59]{Speed}
+\includegraphics[scale =.59]{EaseOfUse}
+\includegraphics[scale =.59]{Comfort}
+\includegraphics[scale =.59]{Preference}
+\includegraphics[scale =.59]{Improvement}
+\includegraphics[scale =.59]{Issues}
 \end{figure}
 \newpage
 \section{Text for the test}
